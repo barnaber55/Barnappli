@@ -5,16 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Barnappli Sheets 📊</title>
   
-  <!-- ===== STYLES INTÉGRÉS ===== -->
   <style>
-    /* Réinitialiser tous les styles par défaut */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
-    /* Style du body - fond et police */
     body {
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -23,13 +20,11 @@
       color: #333;
     }
 
-    /* Conteneur principal */
     .container {
       max-width: 900px;
       margin: 0 auto;
     }
 
-    /* En-tête avec titre */
     header {
       text-align: center;
       margin-bottom: 30px;
@@ -47,7 +42,6 @@
       opacity: 0.9;
     }
 
-    /* Carte du formulaire */
     .form-card {
       background: white;
       border-radius: 15px;
@@ -64,7 +58,6 @@
       padding-bottom: 10px;
     }
 
-    /* Conteneur des inputs du formulaire */
     .form-group {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -72,12 +65,10 @@
       margin-bottom: 15px;
     }
 
-    /* Colonne complète pour la note */
     .form-group.full {
       grid-template-columns: 1fr;
     }
 
-    /* Style des champs input */
     input, textarea {
       padding: 12px;
       border: 2px solid #E0E0E0;
@@ -98,7 +89,6 @@
       min-height: 60px;
     }
 
-    /* Label des inputs */
     .input-wrapper {
       display: flex;
       flex-direction: column;
@@ -112,7 +102,6 @@
       margin-bottom: 5px;
     }
 
-    /* Boutons du formulaire */
     .button-group {
       display: flex;
       gap: 10px;
@@ -132,7 +121,6 @@
       text-transform: uppercase;
     }
 
-    /* Bouton Ajouter */
     .btn-add {
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: white;
@@ -148,7 +136,6 @@
       transform: translateY(0);
     }
 
-    /* Bouton Vider */
     .btn-clear {
       background: #FF6B6B;
       color: white;
@@ -160,7 +147,6 @@
       transform: translateY(-2px);
     }
 
-    /* Bouton Télécharger */
     .btn-download {
       background: #4ECDC4;
       color: white;
@@ -172,7 +158,6 @@
       transform: translateY(-2px);
     }
 
-    /* Bouton Supprimer (petit) */
     .btn-delete {
       background: #FF6B6B;
       color: white;
@@ -188,7 +173,6 @@
       background: #FF5252;
     }
 
-    /* Carte du tableau */
     .table-card {
       background: white;
       border-radius: 15px;
@@ -206,7 +190,6 @@
       padding-bottom: 10px;
     }
 
-    /* Styles du tableau */
     table {
       width: 100%;
       border-collapse: collapse;
@@ -230,10 +213,6 @@
       border-bottom: 1px solid #E0E0E0;
     }
 
-    table tbody tr {
-      transition: background 0.3s ease;
-    }
-
     table tbody tr:hover {
       background: #F8F9FF;
     }
@@ -242,7 +221,6 @@
       background: #F5F7FA;
     }
 
-    /* Message si tableau vide */
     .empty-message {
       text-align: center;
       padding: 40px 20px;
@@ -250,19 +228,6 @@
       font-size: 16px;
     }
 
-    /* Boutons d'action en bas */
-    .action-buttons {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .action-buttons button {
-      flex: 1;
-      min-width: 160px;
-    }
-
-    /* Responsive mobile */
     @media (max-width: 600px) {
       header h1 {
         font-size: 24px;
@@ -283,14 +248,6 @@
       button {
         padding: 12px 16px;
         font-size: 14px;
-      }
-
-      .action-buttons {
-        flex-direction: column;
-      }
-
-      .action-buttons button {
-        min-width: auto;
       }
     }
 
@@ -323,13 +280,11 @@
 
 <body>
   <div class="container">
-    <!-- En-tête -->
     <header>
       <h1>📊 Barnappli Sheets</h1>
       <p>Votre gestionnaire de données mobile-friendly</p>
     </header>
 
-    <!-- Formulaire -->
     <div class="form-card">
       <h2>➕ Ajouter une ligne</h2>
       
@@ -370,56 +325,46 @@
       </div>
     </div>
 
-    <!-- Tableau -->
     <div class="table-card">
       <h2>📋 Mes données</h2>
       <div id="tableContainer"></div>
     </div>
   </div>
 
-  <!-- ===== JAVASCRIPT INTÉGRÉ ===== -->
   <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
   
   <script>
-    // ===== CONFIGURATION =====
-    // Clé pour stocker les données dans localStorage (mémoire du téléphone)
     const STORAGE_KEY = 'barnappli_sheets_data';
 
-    // ===== CHARGER LES DONNÉES AU DÉMARRAGE =====
-    // Quand la page se charge, récupérer les données sauvegardées
     function chargerDonnees() {
-      // Récupérer les données du localStorage (ou un tableau vide si rien)
       const donnees = localStorage.getItem(STORAGE_KEY);
-      
-      if (donnees) {
-        // Si des données existent, les retourner
-        return JSON.parse(donnees);
-      }
-      // Sinon, retourner un tableau vide
-      return [];
+      return donnees ? JSON.parse(donnees) : [];
     }
 
-    // ===== SAUVEGARDER LES DONNÉES =====
-    // Sauvegarder les données dans localStorage (mémoire du téléphone)
     function sauvegarderDonnees(donnees) {
-      // Convertir le tableau en JSON et le stocker
       localStorage.setItem(STORAGE_KEY, JSON.stringify(donnees));
     }
 
-    // ===== AFFICHER LE TABLEAU =====
-    // Mettre à jour l'affichage du tableau avec les données actuelles
+    function echapperHTML(texte) {
+      const map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+      };
+      return String(texte).replace(/[&<>"']/g, m => map[m]);
+    }
+
     function afficherTableau() {
-      // Charger les données depuis localStorage
       const donnees = chargerDonnees();
       const tableContainer = document.getElementById('tableContainer');
 
-      // Si le tableau est vide, afficher un message
       if (donnees.length === 0) {
         tableContainer.innerHTML = '<div class="empty-message">Aucune donnée. Ajoutez une ligne pour commencer ! 📝</div>';
         return;
       }
 
-      // Créer le HTML du tableau
       let html = `
         <table>
           <thead>
@@ -434,7 +379,6 @@
           <tbody>
       `;
 
-      // Boucler sur chaque ligne de données
       donnees.forEach((ligne, index) => {
         html += `
           <tr>
@@ -454,110 +398,73 @@
         </table>
       `;
 
-      // Afficher le tableau
       tableContainer.innerHTML = html;
     }
 
-    // ===== AJOUTER UNE LIGNE =====
-    // Quand on clique sur "Ajouter"
     function ajouterLigne() {
-      // Récupérer les valeurs du formulaire
       const nom = document.getElementById('nomInput').value.trim();
-      const quantite = document.getElementById('quantiteInput').value.trim();
+      const quantite = parseInt(document.getElementById('quantiteInput').value) || 0;
       const note = document.getElementById('noteInput').value.trim();
 
-      // Vérifier que au moins le nom est rempli
       if (!nom) {
         alert('⚠️ Veuillez entrer un nom');
         return;
       }
 
-      // Charger les données actuelles
       const donnees = chargerDonnees();
-
-      // Ajouter la nouvelle ligne
       donnees.push({
         nom: nom,
-        quantite: quantite || 0,
+        quantite: quantite,
         note: note
       });
 
-      // Sauvegarder dans localStorage
       sauvegarderDonnees(donnees);
 
-      // Vider le formulaire
       document.getElementById('nomInput').value = '';
       document.getElementById('quantiteInput').value = '';
       document.getElementById('noteInput').value = '';
 
-      // Mettre à jour l'affichage
       afficherTableau();
-
-      // Feedback utilisateur
       console.log('✅ Ligne ajoutée avec succès !');
     }
 
-    // ===== SUPPRIMER UNE LIGNE =====
-    // Quand on clique sur "Supprimer" pour une ligne
     function supprimerLigne(index) {
-      // Charger les données
       const donnees = chargerDonnees();
 
-      // Vérifier que l'index est valide
       if (index >= 0 && index < donnees.length) {
-        // Supprimer la ligne à cet index
         donnees.splice(index, 1);
-
-        // Sauvegarder
         sauvegarderDonnees(donnees);
-
-        // Mettre à jour l'affichage
         afficherTableau();
-
         console.log('🗑️ Ligne supprimée');
       }
     }
 
-    // ===== VIDER TOUT AVEC CONFIRMATION =====
-    // Demander confirmation avant de vider
     function confirmerVider() {
       if (confirm('⚠️ Êtes-vous sûr ? Cette action est irréversible !')) {
         viderTout();
       }
     }
 
-    // Vider complètement les données
     function viderTout() {
-      // Vider localStorage
       localStorage.removeItem(STORAGE_KEY);
 
-      // Vider les champs du formulaire
       document.getElementById('nomInput').value = '';
       document.getElementById('quantiteInput').value = '';
       document.getElementById('noteInput').value = '';
 
-      // Mettre à jour l'affichage
       afficherTableau();
-
       console.log('🧹 Tout a été vidé');
     }
 
-    // ===== TÉLÉCHARGER EN EXCEL =====
-    // Créer et télécharger un fichier Excel
     function telechargerExcel() {
-      // Charger les données
       const donnees = chargerDonnees();
 
-      // Vérifier qu'il y a au moins une ligne
       if (donnees.length === 0) {
         alert('⚠️ Le tableau est vide. Ajoutez des données d\'abord !');
         return;
       }
 
-      // Créer les en-têtes
       const headers = ['#', 'Nom', 'Quantité', 'Note'];
-
-      // Créer les lignes du tableau
       const rows = donnees.map((ligne, index) => [
         index + 1,
         ligne.nom,
@@ -565,45 +472,23 @@
         ligne.note
       ]);
 
-      // Combiner les en-têtes et les lignes
       const data = [headers, ...rows];
-
-      // Créer un classeur Excel
       const worksheet = XLSX.utils.aoa_to_sheet(data);
 
-      // Définir les largeurs des colonnes
       worksheet['!cols'] = [
-        { wch: 5 },   // # : 5 caractères
-        { wch: 20 },  // Nom : 20 caractères
-        { wch: 12 },  // Quantité : 12 caractères
-        { wch: 30 }   // Note : 30 caractères
+        { wch: 5 },
+        { wch: 20 },
+        { wch: 12 },
+        { wch: 30 }
       ];
 
-      // Créer un classeur (workbook)
       const workbook = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(workbook, worksheet, 'Données');
-
-      // Télécharger le fichier
       XLSX.writeFile(workbook, 'barnappli_data.xlsx');
 
       console.log('📥 Excel téléchargé');
     }
 
-    // ===== FONCTION UTILITAIRE : Échapper HTML =====
-    // Empêcher les injections de code malveillant
-    function echapperHTML(texte) {
-      const map = {
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        '"': '&quot;',
-        "'": '&#039;'
-      };
-      return texte.replace(/[&<>"']/g, m => map[m]);
-    }
-
-    // ===== TOUCHE ENTRÉE DANS LES INPUTS =====
-    // Permettre d'ajouter une ligne en appuyant sur "Entrée"
     document.getElementById('nomInput').addEventListener('keypress', function(e) {
       if (e.key === 'Enter') ajouterLigne();
     });
@@ -613,11 +498,9 @@
     });
 
     document.getElementById('noteInput').addEventListener('keypress', function(e) {
-      if (e.key === 'Enter' && e.ctrlKey) ajouterLigne(); // Ctrl+Entrée dans textarea
+      if (e.key === 'Enter' && e.ctrlKey) ajouterLigne();
     });
 
-    // ===== INITIALISATION =====
-    // Au chargement de la page, afficher le tableau
     afficherTableau();
   </script>
 </body>
