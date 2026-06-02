@@ -1,0 +1,115 @@
+/* Styles généraux de la page entière */
+body {
+  /* Fond gris clair */
+  background-color: #f0f0f0;
+  /* Police sans serif pour meilleure lisibilité sur mobile */
+  font-family: Arial, sans-serif;
+  /* Marges intérieures de la page */
+  padding: 20px;
+  /* Marge extérieure zéro */
+  margin: 0;
+}
+
+/* Styles de l'en-tête */
+header {
+  /* Centre le contenu de l'en-tête */
+  text-align: center;
+  /* Espacement sous l'en-tête */
+  margin-bottom: 30px;
+}
+
+/* Styles du titre principal H1 */
+h1 {
+  /* Couleur du texte (gris foncé) */
+  color: #333;
+  /* Espacement sous le titre */
+  margin: 0;
+  /* Taille de police adaptée au mobile */
+  font-size: 24px;
+}
+
+/* Styles de la carte (container principal) */
+.card {
+  /* Fond blanc pour bien contraster */
+  background-color: white;
+  /* Espacement intérieur de 20px */
+  padding: 20px;
+  /* Coins arrondis pour un design moderne */
+  border-radius: 10px;
+  /* Largeur maximum de 400px */
+  max-width: 400px;
+  /* Centre la carte horizontalement */
+  margin: 0 auto;
+  /* Ombre légère pour faire ressortir la carte */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Styles des paragraphes dans la carte */
+.card p {
+  /* Couleur du texte (gris) */
+  color: #666;
+  /* Espacement entre les paragraphes */
+  margin: 10px 0;
+  /* Ligne centrée */
+  text-align: center;
+}
+
+/* Styles du bouton */
+button {
+  /* Fond couleur GitHub (gris foncé) */
+  background-color: #24292e;
+  /* Couleur du texte blanc */
+  color: white;
+  /* Pas de bordure */
+  border: none;
+  /* Padding pour que le bouton soit cliquable facilement sur mobile */
+  padding: 12px 24px;
+  /* Coins arrondis */
+  border-radius: 6px;
+  /* Taille de police lisible */
+  font-size: 16px;
+  /* Curseur en pointeur au survol */
+  cursor: pointer;
+  /* Affiche le bouton en block pour qu'il soit large */
+  display: block;
+  /* Centre le bouton horizontalement */
+  margin: 20px auto 0;
+  /* Transition douce pour l'effet hover */
+  transition: background-color 0.3s ease;
+}
+
+/* Styles du bouton au survol (hover) - plus clair */
+button:hover {
+  /* Couleur GitHub plus claire */
+  background-color: #2d333b;
+}
+
+/* Styles du bouton quand on le maintient enfoncé (active) */
+button:active {
+  /* Couleur encore plus claire pour le feedback tactile */
+  background-color: #444c56;
+}
+
+/* Media query pour les petits écrans (mobile < 480px) */
+@media (max-width: 480px) {
+  body {
+    /* Padding réduit sur très petit écran */
+    padding: 10px;
+  }
+
+  h1 {
+    /* Titre plus petit sur très petit écran */
+    font-size: 20px;
+  }
+
+  .card {
+    /* Padding réduit sur très petit écran */
+    padding: 15px;
+  }
+
+  button {
+    /* Bouton plus gros pour faciliter la sélection sur mobile */
+    padding: 15px 20px;
+    font-size: 18px;
+  }
+}
