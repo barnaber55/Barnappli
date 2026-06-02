@@ -19,42 +19,48 @@
       align-items: center;
       justify-content: center;
       padding: 20px;
+      background: linear-gradient(180deg, #0a0e27 0%, #1a0a3e 30%, #2d0055 60%, #1a0a3e 100%);
       position: relative;
       overflow: hidden;
     }
 
-    /* Fond image vraie ville neon cyberpunk */
+    /* Éléments de ville neon générés */
     body::before {
       content: '';
       position: fixed;
-      top: 0;
+      bottom: 0;
       left: 0;
       width: 100%;
-      height: 100%;
-      background-image: url('https://images.unsplash.com/photo-1514432324607-2e4f9a08ebc9?w=1200&h=800&fit=crop');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
+      height: 60%;
+      background: 
+        /* Bâtiment 1 */
+        linear-gradient(90deg, transparent 0%, #00ccff 2%, #00ccff 5%, transparent 7%) 10% 30% / 120px 300px,
+        /* Bâtiment 2 */
+        linear-gradient(90deg, transparent 0%, #9900ff 1%, #9900ff 4%, transparent 6%) 25% 25% / 100px 350px,
+        /* Bâtiment 3 */
+        linear-gradient(90deg, transparent 0%, #00ffcc 2%, #00ffcc 5%, transparent 8%) 40% 35% / 140px 280px,
+        /* Bâtiment 4 */
+        linear-gradient(90deg, transparent 0%, #ff00ff 1%, #ff00ff 3%, transparent 5%) 55% 40% / 110px 260px,
+        /* Bâtiment 5 */
+        linear-gradient(90deg, transparent 0%, #00ccff 2%, #00ccff 6%, transparent 8%) 70% 32% / 130px 320px,
+        /* Bâtiment 6 */
+        linear-gradient(90deg, transparent 0%, #9900ff 1%, #9900ff 4%, transparent 6%) 85% 28% / 120px 340px,
+        /* Lignes horizontales neon */
+        linear-gradient(90deg, transparent 0%, #00ffff 0%, #00ffff 100%, transparent 100%) 0% 50% / 100% 1px,
+        linear-gradient(90deg, transparent 0%, #9900ff 0%, #9900ff 100%, transparent 100%) 0% 55% / 100% 1px,
+        /* Cercles */
+        radial-gradient(circle at 30% 40%, rgba(0, 255, 255, 0.3) 0%, transparent 15%) 0% 0% / 400px 400px,
+        radial-gradient(circle at 70% 30%, rgba(255, 0, 255, 0.2) 0%, transparent 15%) 0% 0% / 500px 500px;
+      background-repeat: no-repeat;
       z-index: 0;
-      filter: brightness(0.5) contrast(1.2) saturate(1.3) hue-rotate(15deg);
+      filter: blur(1px);
+      opacity: 0.8;
+      animation: cityPulse 4s ease-in-out infinite;
     }
 
-    /* Overlay sombre bleu/violet */
-    body::after {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, rgba(10, 14, 39, 0.6) 0%, rgba(26, 10, 62, 0.6) 50%, rgba(51, 0, 85, 0.6) 100%);
-      z-index: 0;
-      animation: pulse 8s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
+    @keyframes cityPulse {
       0%, 100% { opacity: 0.7; }
-      50% { opacity: 0.85; }
+      50% { opacity: 0.9; }
     }
 
     .container {
