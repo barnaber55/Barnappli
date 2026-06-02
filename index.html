@@ -1,33 +1,624 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <!-- Déclaration du type de document et langue -->
-    <meta charset="UTF-8">
-    <!-- Important pour mobile : dit au navigateur d'adapter la taille -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Titre qui apparaît dans l'onglet du navigateur -->
-    <title>App de barnaber55</title>
-    <!-- Lien vers le fichier de style (CSS) -->
-    <link rel="stylesheet" href="style.css">
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Barnappli Sheets 📊</title>
+  
+  <!-- ===== STYLES INTÉGRÉS ===== -->
+  <style>
+    /* Réinitialiser tous les styles par défaut */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  <body>
-    <!-- En-tête du site -->
+    /* Style du body - fond et police */
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      min-height: 100vh;
+      padding: 15px;
+      color: #333;
+    }
+
+    /* Conteneur principal */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* En-tête avec titre */
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    header h1 {
+      font-size: 32px;
+      margin-bottom: 5px;
+    }
+
+    header p {
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    /* Carte du formulaire */
+    .form-card {
+      background: white;
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 25px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    }
+
+    .form-card h2 {
+      font-size: 18px;
+      margin-bottom: 15px;
+      color: #333;
+      border-bottom: 2px solid #667eea;
+      padding-bottom: 10px;
+    }
+
+    /* Conteneur des inputs du formulaire */
+    .form-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 15px;
+    }
+
+    /* Colonne complète pour la note */
+    .form-group.full {
+      grid-template-columns: 1fr;
+    }
+
+    /* Style des champs input */
+    input, textarea {
+      padding: 12px;
+      border: 2px solid #E0E0E0;
+      border-radius: 8px;
+      font-size: 16px;
+      font-family: inherit;
+      transition: border-color 0.3s ease;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 8px rgba(102, 126, 234, 0.2);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 60px;
+    }
+
+    /* Label des inputs */
+    .input-wrapper {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .input-wrapper label {
+      font-size: 12px;
+      font-weight: bold;
+      color: #666;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+    /* Boutons du formulaire */
+    .button-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      flex: 1;
+      min-width: 140px;
+      padding: 14px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+    }
+
+    /* Bouton Ajouter */
+    .btn-add {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    }
+
+    .btn-add:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-add:active {
+      transform: translateY(0);
+    }
+
+    /* Bouton Vider */
+    .btn-clear {
+      background: #FF6B6B;
+      color: white;
+      box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+    }
+
+    .btn-clear:hover {
+      background: #FF5252;
+      transform: translateY(-2px);
+    }
+
+    /* Bouton Télécharger */
+    .btn-download {
+      background: #4ECDC4;
+      color: white;
+      box-shadow: 0 4px 12px rgba(78, 205, 196, 0.3);
+    }
+
+    .btn-download:hover {
+      background: #45B7B0;
+      transform: translateY(-2px);
+    }
+
+    /* Bouton Supprimer (petit) */
+    .btn-delete {
+      background: #FF6B6B;
+      color: white;
+      padding: 8px 12px;
+      font-size: 12px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-delete:hover {
+      background: #FF5252;
+    }
+
+    /* Carte du tableau */
+    .table-card {
+      background: white;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+      margin-bottom: 25px;
+      overflow-x: auto;
+    }
+
+    .table-card h2 {
+      font-size: 18px;
+      margin-bottom: 15px;
+      color: #333;
+      border-bottom: 2px solid #667eea;
+      padding-bottom: 10px;
+    }
+
+    /* Styles du tableau */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    table thead {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+
+    table th {
+      padding: 12px;
+      text-align: left;
+      font-weight: bold;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+
+    table td {
+      padding: 12px;
+      border-bottom: 1px solid #E0E0E0;
+    }
+
+    table tbody tr {
+      transition: background 0.3s ease;
+    }
+
+    table tbody tr:hover {
+      background: #F8F9FF;
+    }
+
+    table tbody tr:nth-child(even) {
+      background: #F5F7FA;
+    }
+
+    /* Message si tableau vide */
+    .empty-message {
+      text-align: center;
+      padding: 40px 20px;
+      color: #999;
+      font-size: 16px;
+    }
+
+    /* Boutons d'action en bas */
+    .action-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .action-buttons button {
+      flex: 1;
+      min-width: 160px;
+    }
+
+    /* Responsive mobile */
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 24px;
+      }
+
+      .form-group {
+        grid-template-columns: 1fr;
+      }
+
+      table {
+        font-size: 14px;
+      }
+
+      table th, table td {
+        padding: 8px;
+      }
+
+      button {
+        padding: 12px 16px;
+        font-size: 14px;
+      }
+
+      .action-buttons {
+        flex-direction: column;
+      }
+
+      .action-buttons button {
+        min-width: auto;
+      }
+    }
+
+    @media (max-width: 400px) {
+      header h1 {
+        font-size: 20px;
+      }
+
+      .form-card, .table-card {
+        padding: 15px;
+      }
+
+      button {
+        padding: 10px 12px;
+        font-size: 12px;
+      }
+
+      table th, table td {
+        padding: 6px;
+        font-size: 12px;
+      }
+
+      .btn-delete {
+        padding: 6px 8px;
+        font-size: 10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <!-- En-tête -->
     <header>
-      <h1>Salut, c'est barnaber55 ! 👋</h1>
+      <h1>📊 Barnappli Sheets</h1>
+      <p>Votre gestionnaire de données mobile-friendly</p>
     </header>
 
-    <!-- Section principale avec la carte -->
-    <section class="card">
-      <!-- Premier paragraphe de bienvenue -->
-      <p>Bienvenue sur ma première page web</p>
-      <!-- Deuxième paragraphe expliquant que c'est fait depuis mobile -->
-      <p>Faite 100% depuis mon téléphone</p>
-      <!-- Bouton qui déclenche une action en JavaScript -->
-      <button id="monBouton">Clique-moi</button>
-    </section>
+    <!-- Formulaire -->
+    <div class="form-card">
+      <h2>➕ Ajouter une ligne</h2>
+      
+      <div class="form-group">
+        <div class="input-wrapper">
+          <label for="nomInput">Nom</label>
+          <input 
+            type="text" 
+            id="nomInput" 
+            placeholder="ex: Produit A"
+          >
+        </div>
+        <div class="input-wrapper">
+          <label for="quantiteInput">Quantité</label>
+          <input 
+            type="number" 
+            id="quantiteInput" 
+            placeholder="ex: 10"
+            min="0"
+          >
+        </div>
+      </div>
 
-    <!-- Lien vers le fichier JavaScript pour les interactions -->
-    <script src="script.js"></script>
-  </body>
+      <div class="form-group full">
+        <div class="input-wrapper">
+          <label for="noteInput">Note</label>
+          <textarea 
+            id="noteInput" 
+            placeholder="ex: Commande spéciale"
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button class="btn-add" onclick="ajouterLigne()">➕ Ajouter</button>
+        <button class="btn-clear" onclick="confirmerVider()">🗑️ Vider tout</button>
+        <button class="btn-download" onclick="telechargerExcel()">⬇️ Excel</button>
+      </div>
+    </div>
+
+    <!-- Tableau -->
+    <div class="table-card">
+      <h2>📋 Mes données</h2>
+      <div id="tableContainer"></div>
+    </div>
+  </div>
+
+  <!-- ===== JAVASCRIPT INTÉGRÉ ===== -->
+  <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+  
+  <script>
+    // ===== CONFIGURATION =====
+    // Clé pour stocker les données dans localStorage (mémoire du téléphone)
+    const STORAGE_KEY = 'barnappli_sheets_data';
+
+    // ===== CHARGER LES DONNÉES AU DÉMARRAGE =====
+    // Quand la page se charge, récupérer les données sauvegardées
+    function chargerDonnees() {
+      // Récupérer les données du localStorage (ou un tableau vide si rien)
+      const donnees = localStorage.getItem(STORAGE_KEY);
+      
+      if (donnees) {
+        // Si des données existent, les retourner
+        return JSON.parse(donnees);
+      }
+      // Sinon, retourner un tableau vide
+      return [];
+    }
+
+    // ===== SAUVEGARDER LES DONNÉES =====
+    // Sauvegarder les données dans localStorage (mémoire du téléphone)
+    function sauvegarderDonnees(donnees) {
+      // Convertir le tableau en JSON et le stocker
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(donnees));
+    }
+
+    // ===== AFFICHER LE TABLEAU =====
+    // Mettre à jour l'affichage du tableau avec les données actuelles
+    function afficherTableau() {
+      // Charger les données depuis localStorage
+      const donnees = chargerDonnees();
+      const tableContainer = document.getElementById('tableContainer');
+
+      // Si le tableau est vide, afficher un message
+      if (donnees.length === 0) {
+        tableContainer.innerHTML = '<div class="empty-message">Aucune donnée. Ajoutez une ligne pour commencer ! 📝</div>';
+        return;
+      }
+
+      // Créer le HTML du tableau
+      let html = `
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Nom</th>
+              <th>Quantité</th>
+              <th>Note</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+      `;
+
+      // Boucler sur chaque ligne de données
+      donnees.forEach((ligne, index) => {
+        html += `
+          <tr>
+            <td>${index + 1}</td>
+            <td>${echapperHTML(ligne.nom)}</td>
+            <td>${ligne.quantite}</td>
+            <td>${echapperHTML(ligne.note)}</td>
+            <td>
+              <button class="btn-delete" onclick="supprimerLigne(${index})">Supprimer</button>
+            </td>
+          </tr>
+        `;
+      });
+
+      html += `
+          </tbody>
+        </table>
+      `;
+
+      // Afficher le tableau
+      tableContainer.innerHTML = html;
+    }
+
+    // ===== AJOUTER UNE LIGNE =====
+    // Quand on clique sur "Ajouter"
+    function ajouterLigne() {
+      // Récupérer les valeurs du formulaire
+      const nom = document.getElementById('nomInput').value.trim();
+      const quantite = document.getElementById('quantiteInput').value.trim();
+      const note = document.getElementById('noteInput').value.trim();
+
+      // Vérifier que au moins le nom est rempli
+      if (!nom) {
+        alert('⚠️ Veuillez entrer un nom');
+        return;
+      }
+
+      // Charger les données actuelles
+      const donnees = chargerDonnees();
+
+      // Ajouter la nouvelle ligne
+      donnees.push({
+        nom: nom,
+        quantite: quantite || 0,
+        note: note
+      });
+
+      // Sauvegarder dans localStorage
+      sauvegarderDonnees(donnees);
+
+      // Vider le formulaire
+      document.getElementById('nomInput').value = '';
+      document.getElementById('quantiteInput').value = '';
+      document.getElementById('noteInput').value = '';
+
+      // Mettre à jour l'affichage
+      afficherTableau();
+
+      // Feedback utilisateur
+      console.log('✅ Ligne ajoutée avec succès !');
+    }
+
+    // ===== SUPPRIMER UNE LIGNE =====
+    // Quand on clique sur "Supprimer" pour une ligne
+    function supprimerLigne(index) {
+      // Charger les données
+      const donnees = chargerDonnees();
+
+      // Vérifier que l'index est valide
+      if (index >= 0 && index < donnees.length) {
+        // Supprimer la ligne à cet index
+        donnees.splice(index, 1);
+
+        // Sauvegarder
+        sauvegarderDonnees(donnees);
+
+        // Mettre à jour l'affichage
+        afficherTableau();
+
+        console.log('🗑️ Ligne supprimée');
+      }
+    }
+
+    // ===== VIDER TOUT AVEC CONFIRMATION =====
+    // Demander confirmation avant de vider
+    function confirmerVider() {
+      if (confirm('⚠️ Êtes-vous sûr ? Cette action est irréversible !')) {
+        viderTout();
+      }
+    }
+
+    // Vider complètement les données
+    function viderTout() {
+      // Vider localStorage
+      localStorage.removeItem(STORAGE_KEY);
+
+      // Vider les champs du formulaire
+      document.getElementById('nomInput').value = '';
+      document.getElementById('quantiteInput').value = '';
+      document.getElementById('noteInput').value = '';
+
+      // Mettre à jour l'affichage
+      afficherTableau();
+
+      console.log('🧹 Tout a été vidé');
+    }
+
+    // ===== TÉLÉCHARGER EN EXCEL =====
+    // Créer et télécharger un fichier Excel
+    function telechargerExcel() {
+      // Charger les données
+      const donnees = chargerDonnees();
+
+      // Vérifier qu'il y a au moins une ligne
+      if (donnees.length === 0) {
+        alert('⚠️ Le tableau est vide. Ajoutez des données d\'abord !');
+        return;
+      }
+
+      // Créer les en-têtes
+      const headers = ['#', 'Nom', 'Quantité', 'Note'];
+
+      // Créer les lignes du tableau
+      const rows = donnees.map((ligne, index) => [
+        index + 1,
+        ligne.nom,
+        ligne.quantite,
+        ligne.note
+      ]);
+
+      // Combiner les en-têtes et les lignes
+      const data = [headers, ...rows];
+
+      // Créer un classeur Excel
+      const worksheet = XLSX.utils.aoa_to_sheet(data);
+
+      // Définir les largeurs des colonnes
+      worksheet['!cols'] = [
+        { wch: 5 },   // # : 5 caractères
+        { wch: 20 },  // Nom : 20 caractères
+        { wch: 12 },  // Quantité : 12 caractères
+        { wch: 30 }   // Note : 30 caractères
+      ];
+
+      // Créer un classeur (workbook)
+      const workbook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(workbook, worksheet, 'Données');
+
+      // Télécharger le fichier
+      XLSX.writeFile(workbook, 'barnappli_data.xlsx');
+
+      console.log('📥 Excel téléchargé');
+    }
+
+    // ===== FONCTION UTILITAIRE : Échapper HTML =====
+    // Empêcher les injections de code malveillant
+    function echapperHTML(texte) {
+      const map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+      };
+      return texte.replace(/[&<>"']/g, m => map[m]);
+    }
+
+    // ===== TOUCHE ENTRÉE DANS LES INPUTS =====
+    // Permettre d'ajouter une ligne en appuyant sur "Entrée"
+    document.getElementById('nomInput').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') ajouterLigne();
+    });
+
+    document.getElementById('quantiteInput').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') ajouterLigne();
+    });
+
+    document.getElementById('noteInput').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter' && e.ctrlKey) ajouterLigne(); // Ctrl+Entrée dans textarea
+    });
+
+    // ===== INITIALISATION =====
+    // Au chargement de la page, afficher le tableau
+    afficherTableau();
+  </script>
+</body>
 </html>
