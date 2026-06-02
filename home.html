@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Barnappli - Accueil</title>
+  <title>Barnappli - Faire un don</title>
   
   <style>
     * {
@@ -13,252 +13,196 @@
     }
 
     body {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Arial', sans-serif;
       min-height: 100vh;
-      padding: 15px;
-      color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: linear-gradient(135deg, #0a0e27 0%, #1a1a3e 50%, #2d0055 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Fond image ville punk futuriste */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%230f0f2e;stop-opacity:0.9"/><stop offset="50%" style="stop-color:%231a0a3e;stop-opacity:0.9"/><stop offset="100%" style="stop-color:%23330055;stop-opacity:0.9"/></linearGradient><filter id="glow"><feGaussianBlur stdDeviation="3" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><rect width="1200" height="600" fill="url(%23grad1)"/><g filter="url(%23glow)" opacity="0.7"><rect x="100" y="150" width="80" height="250" fill="%23004d99" opacity="0.6"/><rect x="250" y="100" width="100" height="300" fill="%230066cc" opacity="0.5"/><rect x="450" y="200" width="90" height="200" fill="%2300ccff" opacity="0.4"/><rect x="650" y="80" width="110" height="320" fill="%239900ff" opacity="0.5"/><rect x="850" y="150" width="85" height="250" fill="%2300ccff" opacity="0.6"/><rect x="1050" y="120" width="95" height="280" fill="%239900ff" opacity="0.5"/><circle cx="200" cy="300" r="60" fill="%2300ffcc" opacity="0.3"/><circle cx="800" cy="250" r="80" fill="%23ff00ff" opacity="0.2"/><circle cx="600" cy="400" r="100" fill="%2300ccff" opacity="0.2"/><line x1="0" y1="350" x2="1200" y2="350" stroke="%2300ffff" stroke-width="2" opacity="0.3"/><line x1="0" y1="400" x2="1200" y2="400" stroke="%239900ff" stroke-width="2" opacity="0.2"/></g></svg>');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      z-index: 0;
+      animation: pulse 8s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.8; }
+      50% { opacity: 1; }
     }
 
     .container {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    header {
+      position: relative;
+      z-index: 1;
       text-align: center;
-      margin-bottom: 40px;
-      color: white;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      max-width: 600px;
+      width: 100%;
     }
 
-    header h1 {
-      font-size: 36px;
-      margin-bottom: 10px;
-    }
-
-    header p {
-      font-size: 16px;
-      opacity: 0.9;
-    }
-
-    .cards-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin-bottom: 30px;
-    }
-
-    .card {
-      background: white;
-      border-radius: 15px;
-      padding: 25px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-      text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
-    }
-
-    .card-icon {
+    h1 {
       font-size: 48px;
-      margin-bottom: 15px;
-    }
-
-    .card h2 {
-      font-size: 22px;
-      margin-bottom: 10px;
-      color: #333;
-    }
-
-    .card p {
-      font-size: 14px;
-      color: #666;
-      margin-bottom: 20px;
-      line-height: 1.6;
-    }
-
-    .card a, .card button {
-      display: inline-block;
-      padding: 12px 24px;
-      border-radius: 8px;
-      text-decoration: none;
+      margin-bottom: 30px;
+      color: #00ffff;
+      text-shadow: 
+        0 0 10px #00ffff,
+        0 0 20px #0066ff,
+        0 0 30px #9900ff,
+        0 0 40px #00ffff;
+      animation: glow 2s ease-in-out infinite;
+      letter-spacing: 3px;
       font-weight: bold;
-      cursor: pointer;
-      border: none;
-      font-size: 16px;
-      transition: all 0.3s ease;
-      text-transform: uppercase;
     }
 
-    .card a {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    @keyframes glow {
+      0%, 100% {
+        text-shadow: 
+          0 0 10px #00ffff,
+          0 0 20px #0066ff,
+          0 0 30px #9900ff,
+          0 0 40px #00ffff;
+      }
+      50% {
+        text-shadow: 
+          0 0 20px #00ffff,
+          0 0 30px #0066ff,
+          0 0 40px #9900ff,
+          0 0 50px #ff00ff,
+          0 0 60px #00ffff;
+      }
     }
 
-    .card a:hover {
-      box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
-      transform: translateY(-2px);
+    p {
+      font-size: 18px;
+      color: #00ffff;
+      margin-bottom: 50px;
+      opacity: 0.9;
+      text-shadow: 0 0 10px #00ffff;
     }
 
-    .card button {
-      background: #FF6B6B;
-      color: white;
-      box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
-    }
-
-    .card button:hover {
-      background: #FF5252;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(255, 107, 107, 0.4);
-    }
-
-    .donation-card {
-      background: white;
-      border-radius: 15px;
-      padding: 30px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-      margin-top: 40px;
-    }
-
-    .donation-card h2 {
+    .btn-donate {
+      padding: 20px 60px;
       font-size: 24px;
-      margin-bottom: 20px;
-      color: #333;
-      text-align: center;
-      border-bottom: 3px solid #FF6B6B;
-      padding-bottom: 15px;
-    }
-
-    .donation-options {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-      gap: 15px;
-      margin-bottom: 20px;
-    }
-
-    .donation-btn {
-      padding: 15px;
-      border: 2px solid #667eea;
-      border-radius: 8px;
-      background: white;
-      color: #667eea;
       font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      border: 3px solid #00ffff;
+      background: transparent;
+      color: #00ffff;
       cursor: pointer;
+      position: relative;
+      overflow: hidden;
       transition: all 0.3s ease;
-      font-size: 16px;
+      
+      /* Effet néon tube */
+      text-shadow: 
+        0 0 10px #00ffff,
+        0 0 20px #0066ff,
+        0 0 30px #9900ff;
+      box-shadow: 
+        0 0 10px #00ffff,
+        inset 0 0 10px rgba(0, 255, 255, 0.3),
+        0 0 20px #0066ff,
+        0 0 30px #9900ff;
+      border-radius: 5px;
     }
 
-    .donation-btn:hover {
-      background: #667eea;
-      color: white;
+    .btn-donate::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.3), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .btn-donate:hover {
+      border-color: #ff00ff;
+      color: #ff00ff;
+      text-shadow: 
+        0 0 10px #ff00ff,
+        0 0 20px #00ffff,
+        0 0 30px #0066ff;
+      box-shadow: 
+        0 0 20px #ff00ff,
+        inset 0 0 20px rgba(255, 0, 255, 0.3),
+        0 0 30px #00ffff,
+        0 0 40px #0066ff;
       transform: scale(1.05);
     }
 
-    .donation-btn.active {
-      background: #667eea;
-      color: white;
+    .btn-donate:hover::before {
+      left: 100%;
     }
 
-    .custom-amount {
-      display: none;
-      margin-bottom: 20px;
+    .btn-donate:active {
+      transform: scale(0.98);
     }
 
-    .custom-amount.show {
-      display: block;
+    /* Effets de lumière autour du bouton */
+    .btn-donate::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 0;
+      height: 0;
+      background: radial-gradient(circle, rgba(0, 255, 255, 0.5), transparent);
+      border-radius: 50%;
+      transition: width 0.6s, height 0.6s;
+      pointer-events: none;
     }
 
-    .custom-amount input {
-      width: 100%;
-      padding: 12px;
-      border: 2px solid #E0E0E0;
-      border-radius: 8px;
-      font-size: 16px;
-    }
-
-    .custom-amount input:focus {
-      outline: none;
-      border-color: #667eea;
-      box-shadow: 0 0 8px rgba(102, 126, 234, 0.2);
-    }
-
-    .donation-info {
-      background: #F5F7FA;
-      padding: 15px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-      border-left: 4px solid #667eea;
-    }
-
-    .donation-info p {
-      color: #666;
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
-    .paypal-btn {
-      width: 100%;
-      padding: 16px;
-      background: #0070ba;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-      font-size: 18px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-transform: uppercase;
-      box-shadow: 0 4px 12px rgba(0, 112, 186, 0.3);
-    }
-
-    .paypal-btn:hover {
-      background: #005a94;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(0, 112, 186, 0.4);
-    }
-
-    .google-btn {
-      width: 100%;
-      padding: 16px;
-      background: #4285f4;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-      font-size: 18px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-transform: uppercase;
-      box-shadow: 0 4px 12px rgba(66, 133, 244, 0.3);
-      margin-top: 10px;
-    }
-
-    .google-btn:hover {
-      background: #357ae8;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(66, 133, 244, 0.4);
+    .btn-donate:active::after {
+      width: 300px;
+      height: 300px;
     }
 
     @media (max-width: 600px) {
-      header h1 {
+      h1 {
+        font-size: 36px;
+        letter-spacing: 2px;
+      }
+
+      p {
+        font-size: 16px;
+      }
+
+      .btn-donate {
+        padding: 16px 40px;
+        font-size: 18px;
+        letter-spacing: 1px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      h1 {
         font-size: 28px;
       }
 
-      .cards-grid {
-        grid-template-columns: 1fr;
+      p {
+        font-size: 14px;
       }
 
-      .donation-options {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .donation-card {
-        padding: 20px;
+      .btn-donate {
+        padding: 14px 30px;
+        font-size: 16px;
       }
     }
   </style>
@@ -266,141 +210,21 @@
 
 <body>
   <div class="container">
-    <!-- En-tête -->
-    <header>
-      <h1>🚀 Barnappli</h1>
-      <p>Bienvenue sur mes applications web</p>
-    </header>
-
-    <!-- Grille des apps -->
-    <div class="cards-grid">
-      <!-- Card Sheets -->
-      <div class="card">
-        <div class="card-icon">📊</div>
-        <h2>Barnappli Sheets</h2>
-        <p>Gestionnaire de données avec export Excel</p>
-        <a href="index.html">Ouvrir l'app</a>
-      </div>
-
-      <!-- Card Donation -->
-      <div class="card">
-        <div class="card-icon">❤️</div>
-        <h2>Faire un don</h2>
-        <p>Soutenir le développement</p>
-        <button onclick="scrollToDonation()">Faire un don</button>
-      </div>
-    </div>
-
-    <!-- Section Donation -->
-    <div class="donation-card" id="donationSection">
-      <h2>❤️ Soutenir Barnappli</h2>
-
-      <div class="donation-info">
-        <p>Merci de votre soutien ! Votre don aidera à développer de nouvelles features et à améliorer l'application.</p>
-      </div>
-
-      <!-- Choix du montant -->
-      <div>
-        <p style="font-weight: bold; margin-bottom: 15px;">Choisissez un montant :</p>
-        <div class="donation-options">
-          <button class="donation-btn" onclick="selectAmount(5)">5€</button>
-          <button class="donation-btn" onclick="selectAmount(10)">10€</button>
-          <button class="donation-btn" onclick="selectAmount(25)">25€</button>
-          <button class="donation-btn" onclick="selectAmount(50)">50€</button>
-          <button class="donation-btn" onclick="selectAmount('custom')">Autre</button>
-        </div>
-      </div>
-
-      <!-- Input personnalisé -->
-      <div class="custom-amount" id="customAmount">
-        <input 
-          type="number" 
-          id="customInput" 
-          placeholder="Entrez votre montant en €"
-          min="1"
-          max="10000"
-        >
-      </div>
-
-      <!-- Boutons PayPal et Google -->
-      <button class="paypal-btn" onclick="donnerPayPal()">💳 Donner avec PayPal</button>
-      <button class="google-btn" onclick="donnerGoogle()">🔍 Donner avec Google Pay (Test)</button>
-    </div>
+    <h1>🚀 BARNAPPLI</h1>
+    <p>Soutenir le projet</p>
+    
+    <button class="btn-donate" onclick="donnerPayPal()">💳 FAIRE UN DON</button>
   </div>
 
   <script>
-    // Variable globale pour stocker le montant sélectionné
-    let montantSelectionne = 5;
-
-    // Fonction pour sélectionner un montant
-    function selectAmount(montant) {
-      montantSelectionne = montant;
-
-      // Récupérer tous les boutons de montant
-      const boutons = document.querySelectorAll('.donation-btn');
-      
-      // Enlever la classe "active" de tous les boutons
-      boutons.forEach(btn => btn.classList.remove('active'));
-
-      // Afficher/masquer le champ personnalisé
-      const customAmountDiv = document.getElementById('customAmount');
-      if (montant === 'custom') {
-        customAmountDiv.classList.add('show');
-        document.getElementById('customInput').focus();
-      } else {
-        customAmountDiv.classList.remove('show');
-        // Ajouter la classe "active" au bouton cliqué
-        event.target.classList.add('active');
-      }
-    }
-
-    // Fonction pour récupérer le montant final
-    function getMontantFinal() {
-      if (montantSelectionne === 'custom') {
-        const montantCustom = document.getElementById('customInput').value;
-        if (!montantCustom || montantCustom < 1) {
-          alert('⚠️ Veuillez entrer un montant valide');
-          return null;
-        }
-        return montantCustom;
-      }
-      return montantSelectionne;
-    }
-
-    // Fonction pour donner avec PayPal
     function donnerPayPal() {
-      const montant = getMontantFinal();
-      if (!montant) return;
-
-      // URL PayPal pour test (remplacer par ton vrai compte)
-      // Format: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=TON_EMAIL@gmail.com&item_name=Don Barnappli&amount=MONTANT&currency_code=EUR&return=URL_RETOUR&cancel_return=URL_ANNULATION
-      
+      // URL PayPal pour donation
+      // Montant = 10€ par défaut (modifiable)
+      const montant = 10;
       const paypalURL = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=barnaber55@gmail.com&item_name=Don Barnappli&amount=${montant}&currency_code=EUR&return=${window.location.href}&cancel_return=${window.location.href}`;
       
       window.open(paypalURL, '_blank');
     }
-
-    // Fonction pour donner avec Google (test)
-    function donnerGoogle() {
-      const montant = getMontantFinal();
-      if (!montant) return;
-
-      // Google Pay test - redirige vers Google
-      alert(`✅ Don de ${montant}€ avec Google Pay\n\nCeci est une version test. Un vrai système de paiement serait intégré ici.`);
-      
-      // Pour un vrai Google Pay, il faudrait une intégration backend
-      // Pour l'instant, on simule juste
-    }
-
-    // Fonction pour scroller vers la section donation
-    function scrollToDonation() {
-      document.getElementById('donationSection').scrollIntoView({ behavior: 'smooth' });
-    }
-
-    // Définir 5€ comme montant par défaut et l'activer visuellement
-    window.addEventListener('load', function() {
-      selectAmount(5);
-    });
   </script>
 </body>
 </html>
