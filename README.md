@@ -5,7 +5,7 @@ Une page simple mais moderne avec un design responsive qui rend super bien sur m
 
 ## 📱 Voir le site
 
-👉 **[Visite mon site ici](https://barnaber55.github.io/barnappli/)**
+👉 **[Visite mon site ici](https://barnaber55.github.io/Barnappli/)**
 
 (Le lien devient actif une fois que GitHub Pages est activé)
 
