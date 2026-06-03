@@ -1,507 +1,1029 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Barnappli Sheets 📊</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lilya FOOT 2026 - Ligue 1</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
   
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+  * {
+    font-family: 'Outfit', sans-serif;
+  }
+  
+  body {
+    background: linear-gradient(135deg, #001489 0%, #ffffff 45%, #ffffff 55%, #EF4135 100%);
+    background-size: 300% 300%;
+    animation: gradientShift 20s ease infinite;
+    min-height: 100vh;
+    position: relative;
+  }
+  
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: url('data:image/svg+xml,<svg width="60" height="60" xmlns="http://www.w3.org/2000/svg"><circle cx="30" cy="30" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
+    opacity: 0.3;
+    pointer-events: none;
+  }
+  
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  .france-gradient {
+    background: linear-gradient(90deg, #001489 0%, #ffffff 50%, #EF4135 100%);
+  }
+  
+  .glass {
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 8px 32px rgba(0, 20, 137, 0.15), inset 0 1px 0 rgba(255,255,255,0.6);
+  }
+  
+  .glass-premium {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(25px);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 20px 60px rgba(0, 20, 137, 0.2), inset 0 1px 0 rgba(255,255,255,0.8);
+  }
+  
+  .title-france {
+    background: linear-gradient(90deg, #001489 0%, #ffffff 48%, #ffffff 52%, #EF4135 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.25));
+  }
+  
+  .btn-france {
+    background: linear-gradient(135deg, #001489 0%, #2d4aff 50%, #EF4135 100%);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 20, 137, 0.3);
+  }
+  
+  .btn-france::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    transition: left 0.6s;
+  }
+  
+  .btn-france:hover::before {
+    left: 100%;
+  }
+  
+  .btn-france:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 18px 45px rgba(0, 20, 137, 0.5);
+  }
+  
+  .btn-france:active {
+    transform: translateY(-2px) scale(1.01);
+  }
+  
+  .club-card {
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .club-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0,20,137,0.15) 0%, rgba(239,65,53,0.15) 100%);
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  
+  .club-card:hover::before {
+    opacity: 1;
+  }
+  
+  .club-card:hover {
+    transform: translateY(-12px) scale(1.05);
+    box-shadow: 0 25px 50px rgba(0, 20, 137, 0.4);
+  }
+  
+  .club-card:active {
+    transform: translateY(-6px) scale(1.02);
+  }
+  
+  .club-logo {
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  
+  .club-card:hover .club-logo {
+    transform: scale(1.15) rotate(5deg);
+  }
+  
+  .pitch {
+    background: 
+      radial-gradient(circle at 50% 50%, transparent 15%, rgba(0,0,0,0.1) 15.5%, rgba(0,0,0,0.1) 16%, transparent 16.5%),
+      repeating-linear-gradient(90deg, #2d8a3e 0px, #2d8a3e 80px, #1e6b2d 80px, #1e6b2d 160px),
+      #1e6b2d;
+    background-size: 100% 100%, 160px 160px, 160px 160px;
+    box-shadow: inset 0 0 100px rgba(0,0,0,0.7), 0 20px 60px rgba(0,0,0,0.4);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .pitch-lines {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  
+  .pitch-lines::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 160px;
+    height: 160px;
+    border: 3px solid rgba(255,255,255,0.7);
+    border-radius: 50%;
+  }
+  
+  .pitch-lines::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3px;
+    height: 100%;
+    background: rgba(255,255,255,0.7);
+  }
+  
+  .goal-area-top, .goal-area-bottom {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 45%;
+    height: 20%;
+    border: 3px solid rgba(255,255,255,0.7);
+  }
+  
+  .goal-area-top {
+    top: 0;
+    border-top: none;
+    border-radius: 0 0 16px 16px;
+  }
+  
+  .goal-area-bottom {
+    bottom: 0;
+    border-bottom: none;
+    border-radius: 16px 16px 0 0;
+  }
+  
+  .player-avatar {
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    animation: playerDrop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    cursor: pointer;
+  }
+  
+  @keyframes playerDrop {
+    0% {
+      opacity: 0;
+      transform: translate(-50%, -90%) scale(0.3);
     }
-
-    body {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      min-height: 100vh;
-      padding: 15px;
-      color: #333;
+    100% {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
     }
-
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
+  }
+  
+  .player-avatar:hover {
+    transform: translate(-50%, -50%) scale(1.25);
+    z-index: 50;
+  }
+  
+  .player-avatar:hover .player-photo-wrapper {
+    box-shadow: 0 0 0 6px rgba(255, 215, 0, 0.8), 0 15px 40px rgba(0,0,0,0.8);
+  }
+  
+  .player-photo-wrapper {
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    background: linear-gradient(135deg, #fff, #f0f0f0);
+  }
+  
+  .player-detail {
+    animation: slideUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(50px) scale(0.95);
     }
-
-    header {
-      text-align: center;
-      margin-bottom: 30px;
-      color: white;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
     }
-
-    header h1 {
-      font-size: 32px;
-      margin-bottom: 5px;
-    }
-
-    header p {
-      font-size: 14px;
-      opacity: 0.9;
-    }
-
-    .form-card {
-      background: white;
-      border-radius: 15px;
-      padding: 20px;
-      margin-bottom: 25px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-    }
-
-    .form-card h2 {
-      font-size: 18px;
-      margin-bottom: 15px;
-      color: #333;
-      border-bottom: 2px solid #667eea;
-      padding-bottom: 10px;
-    }
-
-    .form-group {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 15px;
-    }
-
-    .form-group.full {
-      grid-template-columns: 1fr;
-    }
-
-    input, textarea {
-      padding: 12px;
-      border: 2px solid #E0E0E0;
-      border-radius: 8px;
-      font-size: 16px;
-      font-family: inherit;
-      transition: border-color 0.3s ease;
-    }
-
-    input:focus, textarea:focus {
-      outline: none;
-      border-color: #667eea;
-      box-shadow: 0 0 8px rgba(102, 126, 234, 0.2);
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 60px;
-    }
-
-    .input-wrapper {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .input-wrapper label {
-      font-size: 12px;
-      font-weight: bold;
-      color: #666;
-      text-transform: uppercase;
-      margin-bottom: 5px;
-    }
-
-    .button-group {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    button {
-      flex: 1;
-      min-width: 140px;
-      padding: 14px 20px;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-transform: uppercase;
-    }
-
-    .btn-add {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-    }
-
-    .btn-add:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
-    }
-
-    .btn-add:active {
-      transform: translateY(0);
-    }
-
-    .btn-clear {
-      background: #FF6B6B;
-      color: white;
-      box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
-    }
-
-    .btn-clear:hover {
-      background: #FF5252;
-      transform: translateY(-2px);
-    }
-
-    .btn-download {
-      background: #4ECDC4;
-      color: white;
-      box-shadow: 0 4px 12px rgba(78, 205, 196, 0.3);
-    }
-
-    .btn-download:hover {
-      background: #45B7B0;
-      transform: translateY(-2px);
-    }
-
-    .btn-delete {
-      background: #FF6B6B;
-      color: white;
-      padding: 8px 12px;
-      font-size: 12px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .btn-delete:hover {
-      background: #FF5252;
-    }
-
-    .table-card {
-      background: white;
-      border-radius: 15px;
-      padding: 20px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-      margin-bottom: 25px;
-      overflow-x: auto;
-    }
-
-    .table-card h2 {
-      font-size: 18px;
-      margin-bottom: 15px;
-      color: #333;
-      border-bottom: 2px solid #667eea;
-      padding-bottom: 10px;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    table thead {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-    }
-
-    table th {
-      padding: 12px;
-      text-align: left;
-      font-weight: bold;
-      text-transform: uppercase;
-      font-size: 12px;
-    }
-
-    table td {
-      padding: 12px;
-      border-bottom: 1px solid #E0E0E0;
-    }
-
-    table tbody tr:hover {
-      background: #F8F9FF;
-    }
-
-    table tbody tr:nth-child(even) {
-      background: #F5F7FA;
-    }
-
-    .empty-message {
-      text-align: center;
-      padding: 40px 20px;
-      color: #999;
-      font-size: 16px;
-    }
-
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 24px;
-      }
-
-      .form-group {
-        grid-template-columns: 1fr;
-      }
-
-      table {
-        font-size: 14px;
-      }
-
-      table th, table td {
-        padding: 8px;
-      }
-
-      button {
-        padding: 12px 16px;
-        font-size: 14px;
-      }
-    }
-
-    @media (max-width: 400px) {
-      header h1 {
-        font-size: 20px;
-      }
-
-      .form-card, .table-card {
-        padding: 15px;
-      }
-
-      button {
-        padding: 10px 12px;
-        font-size: 12px;
-      }
-
-      table th, table td {
-        padding: 6px;
-        font-size: 12px;
-      }
-
-      .btn-delete {
-        padding: 6px 8px;
-        font-size: 10px;
-      }
-    }
-  </style>
+  }
+  
+  .year-btn {
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .year-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(255,255,255,0.3), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .year-btn:hover::before {
+    opacity: 1;
+  }
+  
+  .year-btn:hover {
+    transform: scale(1.15);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  }
+  
+  .year-btn:active {
+    transform: scale(1.05);
+  }
+  
+  .btn-year-minus {
+    background: linear-gradient(135deg, #EF4135 0%, #c41e3a 100%);
+  }
+  
+  .btn-year-plus {
+    background: linear-gradient(135deg, #001489 0%, #0038a8 100%);
+  }
+  
+  .scrollbar-custom::-webkit-scrollbar {
+    width: 12px;
+  }
+  
+  .scrollbar-custom::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+  }
+  
+  .scrollbar-custom::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #001489, #EF4135);
+    border-radius: 10px;
+    border: 2px solid rgba(255,255,255,0.2);
+  }
+  
+  .scrollbar-custom::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #0028b8, #ff5846);
+  }
+  
+  .floating {
+    animation: floating 4s ease-in-out infinite;
+  }
+  
+  @keyframes floating {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+  }
+  
+  .player-initials {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    color: white;
+    font-size: 1.8rem;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+  
+  .stat-link {
+    background: linear-gradient(135deg, #001489 0%, #4361ee 50%, #EF4135 100%);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 20, 137, 0.3);
+  }
+  
+  .stat-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 20, 137, 0.5);
+  }
+  
+  .page-transition {
+    animation: fadeIn 0.5s ease;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  .badge {
+    backdrop-filter: blur(10px);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+</style>
 </head>
-
-<body>
-  <div class="container">
-    <header>
-      <h1>📊 Barnappli Sheets</h1>
-      <p>Votre gestionnaire de données mobile-friendly</p>
-    </header>
-
-    <div class="form-card">
-      <h2>➕ Ajouter une ligne</h2>
-      
-      <div class="form-group">
-        <div class="input-wrapper">
-          <label for="nomInput">Nom</label>
-          <input 
-            type="text" 
-            id="nomInput" 
-            placeholder="ex: Produit A"
-          >
-        </div>
-        <div class="input-wrapper">
-          <label for="quantiteInput">Quantité</label>
-          <input 
-            type="number" 
-            id="quantiteInput" 
-            placeholder="ex: 10"
-            min="0"
-          >
+<body class="text-gray-900">
+  <!-- Main Menu Page -->
+  <div id="menuPage" class="min-h-screen p-4 md:p-8 page-transition">
+    <div class="max-w-7xl mx-auto">
+      <!-- Header France -->
+      <div class="glass rounded-[2rem] p-8 md:p-12 mb-8 shadow-2xl">
+        <div class="grid md:grid-cols-2 gap-8 items-center">
+          <!-- Left: Welcome -->
+          <div class="floating">
+            <div class="inline-block mb-4">
+              <span class="text-7xl">🇫🇷</span>
+            </div>
+            <h1 class="text-5xl md:text-8xl font-black mb-4 title-france">
+              Lilya FOOT 2026
+            </h1>
+            <h2 class="text-2xl md:text-4xl font-bold text-gray-800 mb-3">
+              Ligue 1 France
+            </h2>
+            <p class="text-lg md:text-xl text-gray-700 font-medium leading-relaxed">
+              Bienvenue sur <span class="font-bold text-blue-900">Lilya FOOT 2026</span><br>
+              Effectifs officiels de Ligue 1 • Saisons 2024 à 2026
+            </p>
+            <div class="flex gap-3 mt-6">
+              <span class="badge glass-dark px-4 py-2 rounded-xl text-white font-semibold text-sm">18 Clubs</span>
+              <span class="badge glass-dark px-4 py-2 rounded-xl text-white font-semibold text-sm">3 Saisons</span>
+              <span class="badge glass-dark px-4 py-2 rounded-xl text-white font-semibold text-sm">200+ Joueurs</span>
+            </div>
+          </div>
+          
+          <!-- Right: Button -->
+          <div class="flex justify-center md:justify-end">
+            <a href="https://fr.wikipedia.org/wiki/Lois_du_jeu_(football)" target="_blank" rel="noopener noreferrer"
+               class="btn-france px-10 py-6 rounded-2xl font-bold text-white text-lg flex items-center gap-4 shadow-2xl group">
+              <i class="fas fa-book-open text-3xl group-hover:scale-110 transition-transform"></i>
+              <div class="text-left">
+                <div class="text-xl">Lois du Football</div>
+                <div class="text-xs opacity-90">Réglementation FIFA • Wikipedia</div>
+              </div>
+              <i class="fas fa-external-link-alt text-xl group-hover:translate-x-1 transition-transform"></i>
+            </a>
+          </div>
         </div>
       </div>
 
-      <div class="form-group full">
-        <div class="input-wrapper">
-          <label for="noteInput">Note</label>
-          <textarea 
-            id="noteInput" 
-            placeholder="ex: Commande spéciale"
-          ></textarea>
+      <!-- Teams List -->
+      <div class="glass rounded-[2rem] p-6 md:p-10 shadow-2xl">
+        <div class="flex items-center gap-4 mb-8">
+          <div class="w-2 h-16 france-gradient rounded-full"></div>
+          <div>
+            <h2 class="text-4xl font-black text-gray-800">
+              Sélectionnez un Club
+            </h2>
+            <p class="text-gray-600 font-medium">Découvrez les effectifs de Ligue 1</p>
+          </div>
+        </div>
+        <div id="teamsList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-h-[70vh] overflow-y-auto scrollbar-custom pr-2">
         </div>
       </div>
-
-      <div class="button-group">
-        <button class="btn-add" onclick="ajouterLigne()">➕ Ajouter</button>
-        <button class="btn-clear" onclick="confirmerVider()">🗑️ Vider tout</button>
-        <button class="btn-download" onclick="telechargerExcel()">⬇️ Excel</button>
-      </div>
-    </div>
-
-    <div class="table-card">
-      <h2>📋 Mes données</h2>
-      <div id="tableContainer"></div>
     </div>
   </div>
 
-  <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+  <!-- Club Detail Page -->
+  <div id="detailPage" class="min-h-screen p-4 md:p-8 hidden page-transition">
+    <div class="max-w-7xl mx-auto">
+      <!-- Header Controls -->
+      <div class="glass rounded-[2rem] p-5 md:p-7 mb-6 shadow-2xl">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-5">
+          <button id="backBtn" class="btn-france px-10 py-5 rounded-2xl font-bold text-white flex items-center gap-3 w-full md:w-auto shadow-xl group">
+            <i class="fas fa-arrow-left text-xl group-hover:-translate-x-1 transition-transform"></i>
+            Retour Menu
+          </button>
+          
+          <div class="flex items-center gap-6">
+            <button id="yearMinus" class="year-btn btn-year-minus w-16 h-16 rounded-2xl font-black text-white text-3xl shadow-xl">
+              −
+            </button>
+            <div class="text-center glass px-10 py-4 rounded-2xl shadow-lg">
+              <p class="text-xs text-gray-600 font-bold mb-1 tracking-wider">SAISON</p>
+              <p id="currentYear" class="text-5xl font-black france-gradient bg-clip-text text-transparent">2024</p>
+            </div>
+            <button id="yearPlus" class="year-btn btn-year-plus w-16 h-16 rounded-2xl font-black text-white text-3xl shadow-xl">
+              +
+            </button>
+          </div>
+          
+          <div id="clubInfo" class="text-center md:text-right w-full md:w-auto glass px-8 py-4 rounded-2xl shadow-lg">
+            <h2 id="clubName" class="text-3xl font-black text-gray-800"></h2>
+            <p id="clubCountry" class="text-gray-600 font-semibold flex items-center gap-2 justify-center md:justify-end mt-1">
+              <span>🇫🇷</span>
+              <span>France • Ligue 1</span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Football Pitch -->
+      <div id="pitchView" class="glass rounded-[2rem] p-4 md:p-8 shadow-2xl">
+        <div class="pitch rounded-3xl w-full aspect-[3/4] md:aspect-[16/9] relative overflow-hidden" id="footballPitch">
+          <div class="pitch-lines">
+            <div class="goal-area-top"></div>
+            <div class="goal-area-bottom"></div>
+          </div>
+          <div id="playersContainer" class="absolute inset-0"></div>
+        </div>
+        <div class="mt-8 flex flex-wrap gap-4 justify-center">
+          <div class="flex items-center gap-3 glass px-5 py-3 rounded-xl shadow-lg">
+            <div class="w-5 h-5 bg-blue-600 rounded-full border-3 border-white shadow-lg"></div>
+            <span class="text-gray-800 font-bold text-sm">Gardien</span>
+          </div>
+          <div class="flex items-center gap-3 glass px-5 py-3 rounded-xl shadow-lg">
+            <div class="w-5 h-5 bg-yellow-500 rounded-full border-3 border-white shadow-lg"></div>
+            <span class="text-gray-800 font-bold text-sm">Défense</span>
+          </div>
+          <div class="flex items-center gap-3 glass px-5 py-3 rounded-xl shadow-lg">
+            <div class="w-5 h-5 bg-green-600 rounded-full border-3 border-white shadow-lg"></div>
+            <span class="text-gray-800 font-bold text-sm">Milieu</span>
+          </div>
+          <div class="flex items-center gap-3 glass px-5 py-3 rounded-xl shadow-lg">
+            <div class="w-5 h-5 bg-red-600 rounded-full border-3 border-white shadow-lg"></div>
+            <span class="text-gray-800 font-bold text-sm">Attaque</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Player Detail View -->
+      <div id="playerDetailView" class="glass rounded-[2rem] p-6 md:p-10 shadow-2xl hidden">
+        <button id="backToPitchBtn" class="btn-france px-10 py-5 rounded-2xl font-bold text-white flex items-center gap-3 mb-8 shadow-xl group">
+          <i class="fas fa-futbol text-xl group-hover:rotate-180 transition-transform duration-500"></i>
+          Retour au Terrain
+        </button>
+        
+        <div class="player-detail">
+          <div id="playerCard" class="glass-premium rounded-[2rem] p-8 md:p-12 shadow-2xl">
+            <!-- Player Header -->
+            <div class="grid md:grid-cols-3 gap-8 items-center mb-8">
+              <div class="md:col-span-1 flex flex-col items-center">
+                <div id="playerPhotoWrapper" class="w-64 h-64 md:w-80 md:h-80 rounded-3xl overflow-hidden mb-6 shadow-2xl border-8 border-white ring-8 ring-blue-600/30 bg-gradient-to-br from-slate-100 to-slate-200">
+                  <div id="playerInitials" class="player-initials hidden"></div>
+                </div>
+              </div>
+              <div class="md:col-span-2">
+                <div class="flex items-start justify-between mb-6">
+                  <div>
+                    <h3 id="playerName" class="text-5xl md:text-6xl font-black text-gray-900 mb-3"></h3>
+                    <p id="playerPosition" class="text-3xl font-bold text-blue-900 mb-4"></p>
+                  </div>
+                  <div class="text-center glass-dark px-6 py-4 rounded-2xl shadow-xl">
+                    <div class="text-xs text-white/80 font-bold mb-1">N°</div>
+                    <span class="text-7xl font-black text-white" id="playerNumber"></span>
+                  </div>
+                </div>
+                
+                <div id="playerStats" class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6"></div>
+                
+                <a id="playerStatsLink" href="#" target="_blank" rel="noopener noreferrer" 
+                   class="stat-link inline-flex items-center gap-3 px-8 py-4 rounded-xl font-bold text-white text-lg shadow-xl">
+                  <i class="fas fa-chart-line text-xl"></i>
+                  Voir la fiche complète
+                  <i class="fas fa-external-link-alt"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- Player Bio -->
+            <div class="glass rounded-2xl p-8 mt-8">
+              <h4 class="text-2xl font-black mb-5 flex items-center gap-3 text-gray-800">
+                <i class="fas fa-user-circle text-blue-700 text-3xl"></i>
+                Biographie
+              </h4>
+              <p id="playerBio" class="text-gray-700 leading-relaxed text-xl"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+const teamsData = {
+  psg: {
+    name: "Paris Saint-Germain",
+    logo: "🔵🔴",
+    primaryColor: "001489",
+    players: {
+      2024: [
+        { name: "Donnarumma", firstName: "Gianluigi", age: 25, nationality: "Italie", position: "GK", posX: 50, posY: 90, number: 99, height: "1.96m", bio: "Gardien italien champion d'Europe 2021. Référence mondiale au poste, arrêt spectaculaires et leadership. Meilleur gardien Euro 2020.", photo: "https://img.a.transfermarkt.technology/portrait/big/299395-1682689408.jpg" },
+        { name: "Hakimi", firstName: "Achraf", age: 26, nationality: "Maroc", position: "DD", posX: 75, posY: 70, number: 2, height: "1.81m", bio: "Latéral droit explosif, demi-finaliste Mondial 2022 avec le Maroc. Vitesse fulgurante et centres précis. Un des meilleurs au monde.", photo: "https://img.a.transfermarkt.technology/portrait/big/398073-1682689588.jpg" },
+        { name: "Marquinhos", firstName: "Marcos", age: 30, nationality: "Brésil", position: "DC", posX: 35, posY: 70, number: 5, height: "1.83m", bio: "Capitaine du PSG. Plus de 400 matchs au club, leader légendaire. Défenseur élégant, excellent relanceur. Icône moderne du club.", photo: "https://img.a.transfermarkt.technology/portrait/big/181767-1682689360.jpg" },
+        { name: "Hernandez", firstName: "Lucas", age: 28, nationality: "France", position: "DG", posX: 25, posY: 70, number: 21, height: "1.84m", bio: "Champion du Monde 2018. Défenseur polyvalent et guerrier. Mentalité de vainqueur, tacles parfaits. Expérience Atletico Madrid et Bayern.", photo: "https://img.a.transfermarkt.technology/portrait/big/342229-1682689444.jpg" },
+        { name: "Vitinha", firstName: "Vitor", age: 24, nationality: "Portugal", position: "MC", posX: 40, posY: 50, number: 17, height: "1.72m", bio: "Milieu portugais technique. Révélation de la saison 2023-24. Vision du jeu exceptionnelle, pressing intense. Maestro du milieu.", photo: "https://img.a.transfermarkt.technology/portrait/big/580553-1682689914.jpg" },
+        { name: "Zaïre-Emery", firstName: "Warren", age: 18, nationality: "France", position: "MC", posX: 60, posY: 50, number: 33, height: "1.78m", bio: "Prodigy formé au club. Déjà international français à 18 ans. Maturité exceptionnelle, volume de jeu énorme. Futur Ballon d'Or.", photo: "https://img.a.transfermarkt.technology/portrait/big/844738-1682689552.jpg" },
+        { name: "Dembélé", firstName: "Ousmane", age: 27, nationality: "France", position: "AD", posX: 75, posY: 25, number: 10, height: "1.78m", bio: "Ailier ambidextre. Champion du Monde 2018, dribbles déroutants. Vitesse et technique de classe mondiale. Imprévisible.", photo: "https://img.a.transfermarkt.technology/portrait/big/288230-1682689530.jpg" },
+        { name: "Mbappé", firstName: "Kylian", age: 26, nationality: "France", position: "AG", posX: 25, posY: 25, number: 7, height: "1.78m", bio: "Superstar mondiale. Champion du Monde 2018, vitesse supersonique. Buteur de légende, décisif dans les grands matchs. Légende du PSG.", photo: "https://img.a.transfermarkt.technology/portrait/big/342229-1704299564.jpg" },
+        { name: "Kolo Muani", firstName: "Randal", age: 26, nationality: "France", position: "BU", posX: 50, posY: 15, number: 23, height: "1.87m", bio: "Buteur français finaliste Mondial 2022. Puissance et finition. Profil moderne, pressing. Duel contre Martinez en finale légendaire.", photo: "https://img.a.transfermarkt.technology/portrait/big/443764-1682689635.jpg" },
+        { name: "Lee", firstName: "Kang-In", age: 23, nationality: "Corée du Sud", position: "MOC", posX: 50, posY: 40, number: 19, height: "1.73m", bio: "Meneur coréen technique. Vainqueur des Asian Games 2023. Vision créative, coups de pied arrêtés. Star en Asie.", photo: "https://img.a.transfermarkt.technology/portrait/big/462449-1682689787.jpg" },
+        { name: "Danilo", firstName: "Pereira", age: 33, nationality: "Portugal", position: "DC", posX: 65, posY: 70, number: 15, height: "1.88m", bio: "Défenseur portugais champion d'Europe 2016. Expérience et impact physique. Polyvalent défenseur/milieu. Leader vocal.", photo: "https://img.a.transfermarkt.technology/portrait/big/100180-1682689411.jpg" }
+      ],
+      2025: [
+        { name: "Donnarumma", firstName: "Gianluigi", age: 26, nationality: "Italie", position: "GK", posX: 50, posY: 90, number: 99, height: "1.96m", bio: "Top 3 des gardiens mondiaux. Décisif en Ligue des Champions. Arrêts monumentaux, mental d'acier. Capitaine de l'Italie.", photo: "https://img.a.transfermarkt.technology/portrait/big/299395-1682689408.jpg" },
+        { name: "Hakimi", firstName: "Achraf", age: 27, nationality: "Maroc", position: "DD", posX: 75, posY: 70, number: 2, height: "1.81m", bio: "Meilleur latéral droit du monde. Capitaine du Maroc. Sprints dévastateurs, centres caviar. Ballon d'Or Africain en vue.", photo: "https://img.a.transfermarkt.technology/portrait/big/398073-1682689588.jpg" },
+        { name: "Marquinhos", firstName: "Marcos", age: 31, nationality: "Brésil", position: "DC", posX: 35, posY: 70, number: 5, height: "1.83m", bio: "Légende du PSG. Plus de 450 matchs, icône du club. Sang-froid légendaire, relance laser. Capitaine respecté.", photo: "https://img.a.transfermarkt.technology/portrait/big/181767-1682689360.jpg" },
+        { name: "Mendes", firstName: "Nuno", age: 23, nationality: "Portugal", position: "DG", posX: 25, posY: 70, number: 25, height: "1.76m", bio: "Latéral portugais explosif. Champion d'Europe Espoirs 2023. Débordements percutants, qualité de centre. Futur grand.", photo: "https://img.a.transfermarkt.technology/portrait/big/580564-1682689860.jpg" },
+        { name: "Ugarte", firstName: "Manuel", age: 24, nationality: "Uruguay", position: "MDC", posX: 50, posY: 60, number: 4, height: "1.82m", bio: "Sentinelle uruguayenne. Récupération de balle d'élite. Warrior du milieu, pressing monstrueux. Meilleur tacleur d'Europe.", photo: "https://img.a.transfermarkt.technology/portrait/big/610620-1682689935.jpg" },
+        { name: "Vitinha", firstName: "Vitor", age: 25, nationality: "Portugal", position: "MC", posX: 40, posY: 45, number: 17, height: "1.72m", bio: "MVP de Ligue 1 2024. Chef d'orchestre du milieu parisien. Pressing, passes, buts. Candidat Ballon d'Or.", photo: "https://img.a.transfermarkt.technology/portrait/big/580553-1682689914.jpg" },
+        { name: "Barcola", firstName: "Bradley", age: 23, nationality: "France", position: "AG", posX: 25, posY: 25, number: 29, height: "1.82m", bio: "Ailier français en explosion. International et champion d'Europe Espoirs. Dribbles, vitesse, finition. Révélation absolue.", photo: "https://img.a.transfermarkt.technology/portrait/big/819712-1704219464.jpg" },
+        { name: "Dembélé", firstName: "Ousmane", age: 28, nationality: "France", position: "AD", posX: 75, posY: 25, number: 10, height: "1.78m", bio: "Meilleur passeur de Ligue 1 2024. Maestro de l'aile droite. Ambidextrie unique, dribbles magiques. Vice-capitaine.", photo: "https://img.a.transfermarkt.technology/portrait/big/288230-1682689530.jpg" },
+        { name: "Ramos", firstName: "Gonçalo", age: 24, nationality: "Portugal", position: "BU", posX: 50, posY: 15, number: 9, height: "1.85m", bio: "Buteur portugais triplé au Mondial 2022. Renard des surfaces. Finition clinique, jeu de tête. Machine à buts.", photo: "https://img.a.transfermarkt.technology/portrait/big/610959-1704234724.jpg" },
+        { name: "Lee", firstName: "Kang-In", age: 24, nationality: "Corée du Sud", position: "MOC", posX: 60, posY: 45, number: 19, height: "1.73m", bio: "Numéro 10 créatif. Star du football asiatique. Technique soyeux, passes laser. Héros national en Corée.", photo: "https://img.a.transfermarkt.technology/portrait/big/462449-1682689787.jpg" },
+        { name: "Skriniar", firstName: "Milan", age: 30, nationality: "Slovaquie", position: "DC", posX: 65, posY: 70, number: 37, height: "1.87m", bio: "Défenseur slovaque expérimenté. Solidité garantie. Leader défensif, duel monstrueux. Ex-Inter Milan.", photo: "https://img.a.transfermarkt.technology/portrait/big/208973-1682689456.jpg" }
+      ],
+      2026: [
+        { name: "Tenas", firstName: "Arnau", age: 25, nationality: "Espagne", position: "GK", posX: 50, posY: 90, number: 80, height: "1.85m", bio: "Gardien formé à La Masia. Champion d'Europe Espoirs 2023. Jeu au pied exceptionnel, réflexes félins. Futur numéro 1.", photo: "https://img.a.transfermarkt.technology/portrait/big/567658-1682689975.jpg" },
+        { name: "Hakimi", firstName: "Achraf", age: 28, nationality: "Maroc", position: "DD", posX: 75, posY: 70, number: 2, height: "1.81m", bio: "Ballon d'Or Africain. Latéral droit de référence mondiale. Légende du Maroc, capitaine. Sprints 35km/h, centres parfaits.", photo: "https://img.a.transfermarkt.technology/portrait/big/398073-1682689588.jpg" },
+        { name: "Beraldo", firstName: "Lucas", age: 23, nationality: "Brésil", position: "DC", posX: 35, posY: 70, number: 35, height: "1.86m", bio: "Défenseur brésilien prometteur. Relance et jeu aérien. Gaucher élégant, lecture du jeu. Futur titulaire Seleção.", photo: "https://img.a.transfermarkt.technology/portrait/big/939160-1704250843.jpg" },
+        { name: "Hernandez", firstName: "Lucas", age: 30, nationality: "France", position: "DC", posX: 65, posY: 70, number: 21, height: "1.84m", bio: "Champion du Monde 2018. Cadre et vice-capitaine. Polyvalence totale, mental champion. Warrior absolu.", photo: "https://img.a.transfermarkt.technology/portrait/big/342229-1682689444.jpg" },
+        { name: "Neves", firstName: "João", age: 22, nationality: "Portugal", position: "MDC", posX: 50, posY: 60, number: 87, height: "1.74m", bio: "Pépite portugaise. Vision du jeu exceptionnelle pour son âge. Pressing, passes, intelligence. Futur crack mondial.", photo: "https://img.a.transfermarkt.technology/portrait/big/922341-1706547490.jpg" },
+        { name: "Vitinha", firstName: "Vitor", age: 26, nationality: "Portugal", position: "MC", posX: 40, posY: 45, number: 17, height: "1.72m", bio: "Candidat au Ballon d'Or. Maître du tempo. Milieu total, technique et intelligence. Capitaine du PSG à venir.", photo: "https://img.a.transfermarkt.technology/portrait/big/580553-1682689914.jpg" },
+        { name: "Barcola", firstName: "Bradley", age: 24, nationality: "France", position: "AG", posX: 25, posY: 25, number: 29, height: "1.82m", bio: "Titulaire en EDF. Triplé contre Barcelone en LDC. Vitesse, dribbles, sang-froid. Superstar en devenir.", photo: "https://img.a.transfermarkt.technology/portrait/big/819712-1704219464.jpg" },
+        { name: "Dembélé", firstName: "Ousmane", age: 29, nationality: "France", position: "AD", posX: 75, posY: 25, number: 10, height: "1.78m", bio: "Capitaine. Meilleur joueur de Ligue 1 2025. Légende française, ambidextrie magique. Leader technique et mental.", photo: "https://img.a.transfermarkt.technology/portrait/big/288230-1682689530.jpg" },
+        { name: "Doué", firstName: "Désiré", age: 21, nationality: "France", position: "MOC", posX: 50, posY: 35, number: 14, height: "1.80m", bio: "Crack français médaillé olympique 2024. Percussion et technique. Dribbles dévastateurs, vision. Futur Ballon d'Or.", photo: "https://img.a.transfermarkt.technology/portrait/big/801313-1706548123.jpg" },
+        { name: "Ramos", firstName: "Gonçalo", age: 25, nationality: "Portugal", position: "BU", posX: 50, posY: 15, number: 9, height: "1.85m", bio: "Champion d'Europe 2024. Buteur titulaire du PSG. Instinct du tueur, jeu de tête. 30+ buts par saison.", photo: "https://img.a.transfermarkt.technology/portrait/big/610959-1704234724.jpg" },
+        { name: "Lee", firstName: "Kang-In", age: 25, nationality: "Corée du Sud", position: "MC", posX: 60, posY: 45, number: 19, height: "1.73m", bio: "Capitaine de la Corée du Sud. Créateur d'élite. Technique asiatique légendaire, coups francs. Star planétaire.", photo: "https://img.a.transfermarkt.technology/portrait/big/462449-1682689787.jpg" }
+      ]
+    }
+  },
+  om: {
+    name: "Olympique de Marseille",
+    logo: "⚪🔵",
+    primaryColor: "009ee0",
+    players: {
+      2024: [
+        { name: "Lopez", firstName: "Pau", age: 30, nationality: "Espagne", position: "GK", posX: 50, posY: 90, number: 16, height: "1.90m", bio: "Gardien espagnol expérimenté. Titulaire de l'OM. Jeu au pied excellent, réflexes. Ex-Betis et Roma.", photo: "https://img.a.transfermarkt.technology/portrait/big/283189-1693604089.jpg" },
+        { name: "Clauss", firstName: "Jonathan", age: 32, nationality: "France", position: "DD", posX: 75, posY: 70, number: 7, height: "1.78m", bio: "Latéral droit français. International, centres de qualité. Meilleur passeur de l'OM. Endurance monstrueuse.", photo: "https://img.a.transfermarkt.technology/portrait/big/536598-1693604378.jpg" },
+        { name: "Mbemba", firstName: "Chancel", age: 30, nationality: "Congo", position: "DC", posX: 35, posY: 70, number: 99, height: "1.82m", bio: "Défenseur congolais solide. Capitaine de la RDC. Duel physique, leadership. Vice-champion d'Afrique.", photo: "https://img.a.transfermarkt.technology/portrait/big/224458-1666872798.jpg" },
+        { name: "Balerdi", firstName: "Leonardo", age: 25, nationality: "Argentine", position: "DC", posX: 65, posY: 70, number: 5, height: "1.87m", bio: "Défenseur argentin technique. Relance propre. Gaucher élégant, lecture du jeu. Ex-Dortmund.", photo: "https://img.a.transfermarkt.technology/portrait/big/401527-1693604192.jpg" },
+        { name: "Murillo", firstName: "Amir", age: 28, nationality: "Panama", position: "DG", posX: 25, posY: 70, number: 3, height: "1.83m", bio: "Latéral panaméen athlétique. Capitaine de sa sélection. Vitesse et puissance. Qualifié Mondial.", photo: "https://img.a.transfermarkt.technology/portrait/big/314444-1682689767.jpg" },
+        { name: "Veretout", firstName: "Jordan", age: 31, nationality: "France", position: "MC", posX: 40, posY: 50, number: 27, height: "1.77m", bio: "Milieu français expérimenté. Ancien de l'AS Rome. Volume de jeu, passes. Coups francs dangereux.", photo: "https://img.a.transfermarkt.technology/portrait/big/126540-1693604105.jpg" },
+        { name: "Ounahi", firstName: "Azzedine", age: 24, nationality: "Maroc", position: "MC", posX: 60, posY: 50, number: 8, height: "1.82m", bio: "Milieu marocain demi-finaliste Mondial 2022. Technique élégante. Dribbles soyeux, vision. Révélation Qatar.", photo: "https://img.a.transfermarkt.technology/portrait/big/487159-1682689778.jpg" },
+        { name: "Harit", firstName: "Amine", age: 27, nationality: "Maroc", position: "MOC", posX: 50, posY: 40, number: 11, height: "1.79m", bio: "Meneur marocain créatif. International régulier. Dribbles, passes décisives. Technique maghrébine.", photo: "https://img.a.transfermarkt.technology/portrait/big/322665-1682689673.jpg" },
+        { name: "Sarr", firstName: "Ismaila", age: 26, nationality: "Sénégal", position: "AD", posX: 75, posY: 25, number: 23, height: "1.85m", bio: "Ailier sénégalais explosive. Champion d'Afrique 2022. Vitesse pure, finition. Ex-Watford.", photo: "https://img.a.transfermarkt.technology/portrait/big/336901-1682689731.jpg" },
+        { name: "Aubameyang", firstName: "Pierre-Emerick", age: 35, nationality: "Gabon", position: "BU", posX: 50, posY: 15, number: 10, height: "1.87m", bio: "Buteur gabonais légendaire. Ballon d'Or Africain 2015. Instinct du tueur, vitesse. Ex-Arsenal et Barça.", photo: "https://img.a.transfermarkt.technology/portrait/big/58874-1682689966.jpg" },
+        { name: "Vitinha", firstName: "Vitor", age: 24, nationality: "Portugal", position: "AG", posX: 25, posY: 25, number: 9, height: "1.78m", bio: "Attaquant portugais technique. Recruté de Braga. Finition des deux pieds, dribbles. Espoir international.", photo: "https://img.a.transfermarkt.technology/portrait/big/610462-1682689839.jpg" }
+      ],
+      2025: [
+        { name: "Rulli", firstName: "Geronimo", age: 33, nationality: "Argentine", position: "GK", posX: 50, posY: 90, number: 1, height: "1.89m", bio: "Gardien argentin champion du Monde 2022. Recruté de l'Ajax. Expérience internationale, sang-froid. Ex-Villarreal.", photo: "https://img.a.transfermarkt.technology/portrait/big/221523-1682689654.jpg" },
+        { name: "Clauss", firstName: "Jonathan", age: 33, nationality: "France", position: "DD", posX: 75, posY: 70, number: 7, height: "1.78m", bio: "International français. Titulaire indiscutable à droite. Centres millimétrés, volume. Vice-champion.", photo: "https://img.a.transfermarkt.technology/portrait/big/536598-1693604378.jpg" },
+        { name: "Mbemba", firstName: "Chancel", age: 31, nationality: "Congo", position: "DC", posX: 35, posY: 70, number: 99, height: "1.82m", bio: "Vice-capitaine. Pilier de la défense marseillaise. Expérience, leadership. Monstre physique.", photo: "https://img.a.transfermarkt.technology/portrait/big/224458-1666872798.jpg" },
+        { name: "Cornelius", firstName: "Derek", age: 28, nationality: "Canada", position: "DC", posX: 65, posY: 70, number: 4, height: "1.88m", bio: "Défenseur canadien recruté. International régulier. Jeu aérien, duels. Qualifié Mondial 2026.", photo: "https://img.a.transfermarkt.technology/portrait/big/467403-1682689871.jpg" },
+        { name: "Merlin", firstName: "Quentin", age: 23, nationality: "France", position: "DG", posX: 25, posY: 70, number: 13, height: "1.76m", bio: "Latéral français formé à Nantes. Espoir du football français. Technique, débordements. International Espoirs.", photo: "https://img.a.transfermarkt.technology/portrait/big/666478-1693604146.jpg" },
+        { name: "Hojbjerg", firstName: "Pierre-Emile", age: 30, nationality: "Danemark", position: "MDC", posX: 50, posY: 60, number: 23, height: "1.85m", bio: "Milieu danois d'expérience. Capitaine du Danemark. Récupérateur, leader. Ex-Tottenham.", photo: "https://img.a.transfermarkt.technology/portrait/big/186627-1682689819.jpg" },
+        { name: "Kondogbia", firstName: "Geoffrey", age: 32, nationality: "Centrafrique", position: "MC", posX: 40, posY: 45, number: 19, height: "1.88m", bio: "Milieu défensif international français. Puissance et récupération. Expérience Atletico. Mental de guerrier.", photo: "https://img.a.transfermarkt.technology/portrait/big/129276-1682689708.jpg" },
+        { name: "Greenwood", firstName: "Mason", age: 24, nationality: "Angleterre", position: "AD", posX: 75, posY: 25, number: 10, height: "1.81m", bio: "Ailier anglais technique. Finition des deux pieds. Dribless, vitesse. Talent pur, retour au top.", photo: "https://img.a.transfermarkt.technology/portrait/big/532826-1709053961.jpg" },
+        { name: "Maupay", firstName: "Neal", age: 29, nationality: "France", position: "BU", posX: 50, posY: 15, number: 14, height: "1.73m", bio: "Buteur français de métier. Instinct de buteur pur. Finition clinique, pressing. Ex-Brighton.", photo: "https://img.a.transfermarkt.technology/portrait/big/238722-1682689721.jpg" },
+        { name: "Luis Henrique", firstName: "Henrique", age: 24, nationality: "Brésil", position: "AG", posX: 25, posY: 25, number: 44, height: "1.79m", bio: "Ailier brésilien prometteur. Vitesse et dribbles. Technique sud-américaine, imprévisible. Futur Seleção.", photo: "https://img.a.transfermarkt.technology/portrait/big/666484-1693604359.jpg" },
+        { name: "Rabiot", firstName: "Adrien", age: 30, nationality: "France", position: "MC", posX: 60, posY: 45, number: 25, height: "1.88m", bio: "Milieu français champion du Monde 2018. Retour en France. Box-to-box élégant. Ex-Juventus.", photo: "https://img.a.transfermarkt.technology/portrait/big/182602-1682689830.jpg" }
+      ],
+      2026: [
+        { name: "Rulli", firstName: "Geronimo", age: 34, nationality: "Argentine", position: "GK", posX: 50, posY: 90, number: 1, height: "1.89m", bio: "Champion du Monde 2022. Gardien expérimenté et fiable. Leader vocal, jeu au pied. Légende argentine.", photo: "https://img.a.transfermarkt.technology/portrait/big/221523-1682689654.jpg" },
+        { name: "Clauss", firstName: "Jonathan", age: 34, nationality: "France", position: "DD", posX: 75, posY: 70, number: 7, height: "1.78m", bio: "International français titulaire. Centres et coups de pied arrêtés. Légende de l'OM, fidélité. 300+ matchs.", photo: "https://img.a.transfermarkt.technology/portrait/big/536598-1693604378.jpg" },
+        { name: "Balerdi", firstName: "Leonardo", age: 27, nationality: "Argentine", position: "DC", posX: 35, posY: 70, number: 5, height: "1.87m", bio: "Capitaine de l'OM. Défenseur argentin technique. Relance laser, anticipation. Vice-champion du Monde.", photo: "https://img.a.transfermarkt.technology/portrait/big/401527-1693604192.jpg" },
+        { name: "Brassier", firstName: "Lilian", age: 27, nationality: "France", position: "DC", posX: 65, posY: 70, number: 6, height: "1.83m", bio: "Défenseur français recruté de Brest. Gaucher élégant. Relance, placement. International Espoirs.", photo: "https://img.a.transfermarkt.technology/portrait/big/529834-1693604340.jpg" },
+        { name: "Merlin", firstName: "Quentin", age: 24, nationality: "France", position: "DG", posX: 25, posY: 70, number: 13, height: "1.76m", bio: "International Espoirs français. Avenir de l'EDF. Vitesse, centres. Futur titulaire Bleus.", photo: "https://img.a.transfermarkt.technology/portrait/big/666478-1693604146.jpg" },
+        { name: "Hojbjerg", firstName: "Pierre-Emile", age: 31, nationality: "Danemark", position: "MDC", posX: 50, posY: 60, number: 23, height: "1.85m", bio: "Vice-capitaine. Leader du milieu de terrain. Mental gagnant, pressing. Capitaine du Danemark.", photo: "https://img.a.transfermarkt.technology/portrait/big/186627-1682689819.jpg" },
+        { name: "Kone", firstName: "Ismael", age: 24, nationality: "Canada", position: "MC", posX: 40, posY: 45, number: 8, height: "1.88m", bio: "Milieu canadien technique. International régulier. Box-to-box moderne, volume. Star du Canada.", photo: "https://img.a.transfermarkt.technology/portrait/big/844762-1693604763.jpg" },
+        { name: "Greenwood", firstName: "Mason", age: 25, nationality: "Angleterre", position: "AD", posX: 75, posY: 25, number: 10, height: "1.81m", bio: "Meilleur buteur de l'OM 2024-25. Finition clinique. Ambidextrie parfaite, dribbles. Retour en EDF.", photo: "https://img.a.transfermarkt.technology/portrait/big/532826-1709053961.jpg" },
+        { name: "Wahi", firstName: "Elye", age: 23, nationality: "France", position: "BU", posX: 50, posY: 15, number: 9, height: "1.84m", bio: "Buteur français formé à Montpellier. Espoir de l'EDF. Vitesse, finition. Triplé contre PSG légendaire.", photo: "https://img.a.transfermarkt.technology/portrait/big/644778-1682689944.jpg" },
+        { name: "Rowe", firstName: "Jonathan", age: 23, nationality: "Angleterre", position: "AG", posX: 25, posY: 25, number: 11, height: "1.75m", bio: "Ailier anglais prometteur. International Espoirs. Dribbles, vitesse. Pépite de Norwich.", photo: "https://img.a.transfermarkt.technology/portrait/big/670156-1701093346.jpg" },
+        { name: "Rabiot", firstName: "Adrien", age: 31, nationality: "France", position: "MC", posX: 60, posY: 45, number: 25, height: "1.88m", bio: "Champion du Monde 2018. Milieu complet et expérimenté. Élégance française, volume. Vice-champion du Monde 2022.", photo: "https://img.a.transfermarkt.technology/portrait/big/182602-1682689830.jpg" }
+      ]
+    }
+  },
+  ol: {
+    name: "Olympique Lyonnais",
+    logo: "🔴🔵",
+    primaryColor: "dc143c",
+    players: {
+      2024: [
+        { name: "Lopes", firstName: "Anthony", age: 34, nationality: "Portugal", position: "GK", posX: 50, posY: 90, number: 1, height: "1.84m", bio: "Gardien portugais historique. Plus de 400 matchs avec l'OL. Légende vivante, réflexes. Capitaine emblématique.", photo: "https://img.a.transfermarkt.technology/portrait/big/60612-1682689390.jpg" },
+        { name: "Mata", firstName: "Clinton", age: 32, nationality: "Angola", position: "DD", posX: 75, posY: 70, number: 22, height: "1.78m", bio: "Latéral angolais polyvalent. International. Expérience Club Brugge, vitesse. Warrior.", photo: "https://img.a.transfermarkt.technology/portrait/big/286184-1682689664.jpg" },
+        { name: "Lovren", firstName: "Dejan", age: 35, nationality: "Croatie", position: "DC", posX: 35, posY: 70, number: 5, height: "1.88m", bio: "Défenseur croate finaliste Mondial 2018. Expérience. Ex-Liverpool, champion. Leadership.", photo: "https://img.a.transfermarkt.technology/portrait/big/56980-1682689480.jpg" },
+        { name: "Caleta-Car", firstName: "Duje", age: 28, nationality: "Croatie", position: "DC", posX: 65, posY: 70, number: 55, height: "1.92m", bio: "Défenseur croate robuste. International régulier. Ex-Southampton, jeu aérien. Monstre physique.", photo: "https://img.a.transfermarkt.technology/portrait/big/238145-1682689712.jpg" },
+        { name: "Tagliafico", firstName: "Nicolas", age: 32, nationality: "Argentine", position: "DG", posX: 25, posY: 70, number: 3, height: "1.72m", bio: "Latéral argentin champion du Monde 2022. Expérience Ajax. Warrior, centres. Légende argentine.", photo: "https://img.a.transfermarkt.technology/portrait/big/125684-1682689758.jpg" },
+        { name: "Matic", firstName: "Nemanja", age: 36, nationality: "Serbie", position: "MDC", posX: 50, posY: 60, number: 31, height: "1.94m", bio: "Milieu serbe légendaire. Triple champion d'Angleterre. Expérience Chelsea/Man U. Maestro défensif.", photo: "https://img.a.transfermarkt.technology/portrait/big/38937-1682689466.jpg" },
+        { name: "Caqueret", firstName: "Maxence", age: 24, nationality: "France", position: "MC", posX: 40, posY: 50, number: 6, height: "1.74m", bio: "Milieu formé au club. Vice-capitaine de l'OL. Pressing, passes. Pur produit OL.", photo: "https://img.a.transfermarkt.technology/portrait/big/395546-1682689956.jpg" },
+        { name: "Tolisso", firstName: "Corentin", age: 30, nationality: "France", position: "MC", posX: 60, posY: 50, number: 8, height: "1.81m", bio: "Champion du Monde 2018. Retour à Lyon, son club formateur. Box-to-box, buts. Ex-Bayern Munich.", photo: "https://img.a.transfermarkt.technology/portrait/big/190393-1682689849.jpg" },
+        { name: "Cherki", firstName: "Rayan", age: 21, nationality: "France", position: "MOC", posX: 50, posY: 40, number: 18, height: "1.76m", bio: "Prodigy lyonnais. Dribbles et créativité d'élite. Numéro 10 magique, passes. Futur Ballon d'Or.", photo: "https://img.a.transfermarkt.technology/portrait/big/568228-1682689895.jpg" },
+        { name: "Lacazette", firstName: "Alexandre", age: 33, nationality: "France", position: "BU", posX: 50, posY: 15, number: 10, height: "1.75m", bio: "Capitaine et légende de l'OL. Meilleur buteur du club. Instinct, finition. Ex-Arsenal. Icône.", photo: "https://img.a.transfermarkt.technology/portrait/big/93720-1682689886.jpg" },
+        { name: "Nuamah", firstName: "Ernest", age: 21, nationality: "Ghana", position: "AG", posX: 25, posY: 25, number: 37, height: "1.78m", bio: "Ailier ghanéen explosive. Pépite recrutée du Nordsjælland. Vitesse, dribbles. Futur star.", photo: "https://img.a.transfermarkt.technology/portrait/big/903341-1694018574.jpg" }
+      ],
+      2025: [
+        { name: "Perri", firstName: "Lucas", age: 28, nationality: "Brésil", position: "GK", posX: 50, posY: 90, number: 1, height: "1.97m", bio: "Gardien brésilien recruté de Botafogo. Ex-espoir du Brésil. Grand gabarit, réflexes. Stoppeur de penalties.", photo: "https://img.a.transfermarkt.technology/portrait/big/504911-1682689925.jpg" },
+        { name: "Maitland-Niles", firstName: "Ainsley", age: 28, nationality: "Angleterre", position: "DD", posX: 75, posY: 70, number: 2, height: "1.77m", bio: "Latéral anglais polyvalent. Formé à Arsenal. Vitesse, technique. International anglais.", photo: "https://img.a.transfermarkt.technology/portrait/big/341053-1682689809.jpg" },
+        { name: "Niakhaté", firstName: "Moussa", age: 29, nationality: "Sénégal", position: "DC", posX: 35, posY: 70, number: 19, height: "1.90m", bio: "Défenseur sénégalais. International et champion d'Afrique 2022. Physique, duel. Ex-Mainz.", photo: "https://img.a.transfermarkt.technology/portrait/big/292714-1682689580.jpg" },
+        { name: "Caleta-Car", firstName: "Duje", age: 29, nationality: "Croatie", position: "DC", posX: 65, posY: 70, number: 55, height: "1.92m", bio: "Pilbre de la défense croate. Expérience internationale. Monstre aérien, tacles. Leader.", photo: "https://img.a.transfermarkt.technology/portrait/big/238145-1682689712.jpg" },
+        { name: "Abner", firstName: "Abner", age: 25, nationality: "Brésil", position: "DG", posX: 25, posY: 70, number: 13, height: "1.76m", bio: "Latéral brésilien recruté du Betis. Technique sud-américaine. Vitesse, centres. Futur Seleção.", photo: "https://img.a.transfermarkt.technology/portrait/big/506249-1682689886.jpg" },
+        { name: "Matic", firstName: "Nemanja", age: 37, nationality: "Serbie", position: "MDC", posX: 50, posY: 60, number: 31, height: "1.94m", bio: "Légende serbe. Masterclass tactique et leadership. Expérience 500+ matchs. Mentor.", photo: "https://img.a.transfermarkt.technology/portrait/big/38937-1682689466.jpg" },
+        { name: "Tessmann", firstName: "Tanner", age: 24, nationality: "USA", position: "MC", posX: 40, posY: 45, number: 6, height: "1.88m", bio: "Milieu américain prometteur. International USMNT. Récupérateur, relanceur. Futur star US.", photo: "https://img.a.transfermarkt.technology/portrait/big/687340-1682690004.jpg" },
+        { name: "Fofana", firstName: "Malick", age: 20, nationality: "Belgique", position: "AG", posX: 25, posY: 25, number: 7, height: "1.75m", bio: "Ailier belge explosif. Pépite de Ligue 1. Vitesse, dribbles, finition. International Espoirs.", photo: "https://img.a.transfermarkt.technology/portrait/big/936521-1701959823.jpg" },
+        { name: "Mikautadze", firstName: "Georges", age: 25, nationality: "Géorgie", position: "BU", posX: 50, posY: 15, number: 11, height: "1.76m", bio: "Buteur géorgien révélation Euro 2024. Recruté de Metz. Instinct, finition. Héros national géorgien.", photo: "https://img.a.transfermarkt.technology/portrait/big/488135-1682689994.jpg" },
+        { name: "Tolisso", firstName: "Corentin", age: 31, nationality: "France", position: "MC", posX: 60, posY: 45, number: 8, height: "1.81m", bio: "Vice-champion du Monde 2022. Capitaine emblématique. Expérience, leadership. Légende OL.", photo: "https://img.a.transfermarkt.technology/portrait/big/190393-1682689849.jpg" },
+        { name: "Benrahma", firstName: "Said", age: 30, nationality: "Algérie", position: "MOC", posX: 50, posY: 35, number: 18, height: "1.74m", bio: "Meneur algérien technique. Finition et dribbles. Ex-West Ham, créateur. Magicien du dribble.", photo: "https://img.a.transfermarkt.technology/portrait/big/290822-1682689766.jpg" }
+      ],
+      2026: [
+        { name: "Descamps", firstName: "Remy", age: 29, nationality: "France", position: "GK", posX: 50, posY: 90, number: 30, height: "1.90m", bio: "Gardien français formé à Lille. Héros de la Coupe de France 2025. Réflexes, mental. Futur grand.", photo: "https://img.a.transfermarkt.technology/portrait/big/349512-1682689966.jpg" },
+        { name: "Kumbedi", firstName: "Sael", age: 22, nationality: "France", position: "DD", posX: 75, posY: 70, number: 2, height: "1.75m", bio: "Latéral français espoir. Formé au Havre, international Espoirs. Vitesse, technique. Futur EDF.", photo: "https://img.a.transfermarkt.technology/portrait/big/843865-1682689905.jpg" },
+        { name: "Niakhaté", firstName: "Moussa", age: 30, nationality: "Sénégal", position: "DC", posX: 35, posY: 70, number: 19, height: "1.90m", bio: "Capitaine de l'OL. Pilier défensif sénégalais. Leadership, duels. Champion d'Afrique 2022.", photo: "https://img.a.transfermarkt.technology/portrait/big/292714-1682689580.jpg" },
+        { name: "O'Brien", firstName: "Jake", age: 25, nationality: "Irlande", position: "DC", posX: 65, posY: 70, number: 4, height: "1.97m", bio: "Défenseur irlandais géant. Recruté de Crystal Palace. Jeu aérien monstrueux. International.", photo: "https://img.a.transfermarkt.technology/portrait/big/667186-1702493520.jpg" },
+        { name: "Abner", firstName: "Abner", age: 26, nationality: "Brésil", position: "DG", posX: 25, posY: 70, number: 13, height: "1.76m", bio: "Latéral gauche brésilien titulaire. Centres et débordements. International Seleção. Technique brésilienne.", photo: "https://img.a.transfermarkt.technology/portrait/big/506249-1682689886.jpg" },
+        { name: "Matic", firstName: "Nemanja", age: 38, nationality: "Serbie", position: "MDC", posX: 50, posY: 60, number: 31, height: "1.94m", bio: "Légende vivante du football. Dernière saison au plus haut niveau. Mentor des jeunes. Icône.", photo: "https://img.a.transfermarkt.technology/portrait/big/38937-1682689466.jpg" },
+        { name: "Lepenant", firstName: "Johann", age: 24, nationality: "France", position: "MC", posX: 40, posY: 45, number: 6, height: "1.73m", bio: "Milieu français technique. Formé à l'OL. Pressing, passes. Pur produit de l'académie. Futur cadre.", photo: "https://img.a.transfermarkt.technology/portrait/big/646325-1682689869.jpg" },
+        { name: "Fofana", firstName: "Malick", age: 21, nationality: "Belgique", position: "AG", posX: 25, posY: 25, number: 7, height: "1.75m", bio: "Pépite belge internationale. Futur grand du football européen. Vitesse, dribbles, buts. Crack mondial.", photo: "https://img.a.transfermarkt.technology/portrait/big/936521-1701959823.jpg" },
+        { name: "Mikautadze", firstName: "Georges", age: 26, nationality: "Géorgie", position: "BU", posX: 50, posY: 15, number: 11, height: "1.76m", bio: "Meilleur buteur de l'OL 2024-25. Héros de la Géorgie à l'Euro. Instinct clinique, 30+ buts. Légende géorgienne.", photo: "https://img.a.transfermarkt.technology/portrait/big/488135-1682689994.jpg" },
+        { name: "Cherki", firstName: "Rayan", age: 23, nationality: "France", position: "MOC", posX: 60, posY: 35, number: 18, height: "1.76m", bio: "Numéro 10 de l'OL. Ballon d'Or en puissance, génie pur. Dribbles magiques, passes laser. Futur Zidane.", photo: "https://img.a.transfermarkt.technology/portrait/big/568228-1682689895.jpg" },
+        { name: "Benrahma", firstName: "Said", age: 31, nationality: "Algérie", position: "AD", posX: 75, posY: 25, number: 10, height: "1.74m", bio: "Vice-capitaine. Meneur de jeu algérien expérimenté. Technique, vision, coups francs. Leader technique.", photo: "https://img.a.transfermarkt.technology/portrait/big/290822-1682689766.jpg" }
+      ]
+    }
+  },
+  lille: {
+    name: "LOSC Lille",
+    logo: "🔴⚪",
+    primaryColor: "e0000f",
+    players: { 
+      2024: [
+        { name: "Chevalier", firstName: "Lucas", age: 23, nationality: "France", position: "GK", posX: 50, posY: 90, number: 30, height: "1.89m", bio: "Gardien français espoir. International Espoirs. Réflexes, jeu au pied. Futur numéro 1 EDF.", photo: "https://img.a.transfermarkt.technology/portrait/big/547533-1687783733.jpg" },
+        { name: "Diakité", firstName: "Bafodé", age: 23, nationality: "France", position: "DD", posX: 75, posY: 70, number: 2, height: "1.81m", bio: "Défenseur français polyvalent. Formé à Toulouse. Puissance, vitesse. International Espoirs.", photo: "https://img.a.transfermarkt.technology/portrait/big/543675-1695143908.jpg" },
+        { name: "Yoro", firstName: "Leny", age: 19, nationality: "France", position: "DC", posX: 35, posY: 70, number: 15, height: "1.90m", bio: "Défenseur prodige français. International Espoirs. Maturité, élégance. Futur crack mondial.", photo: "https://img.a.transfermarkt.technology/portrait/big/568248-1687783897.jpg" },
+        { name: "Alexsandro", firstName: "Alexsandro", age: 25, nationality: "Brésil", position: "DC", posX: 65, posY: 70, number: 4, height: "1.90m", bio: "Défenseur brésilien solide. Recruté du Brésil. Jeu aérien, relance. Futur international.", photo: "https://img.a.transfermarkt.technology/portrait/big/687339-1687783885.jpg" },
+        { name: "Ismaily", firstName: "Ismaily", age: 34, nationality: "Brésil", position: "DG", posX: 25, posY: 70, number: 31, height: "1.77m", bio: "Latéral brésilien expérimenté. Vétéran du championnat. Technique, centres. Ex-Shakhtar.", photo: "https://img.a.transfermarkt.technology/portrait/big/158730-1687783776.jpg" },
+        { name: "Andre", firstName: "Benjamin", age: 34, nationality: "France", position: "MDC", posX: 50, posY: 60, number: 21, height: "1.80m", bio: "Capitaine historique. Légende du LOSC. Leadership, pressing. 500+ matchs L1.", photo: "https://img.a.transfermarkt.technology/portrait/big/111625-1687783753.jpg" },
+        { name: "Bentaleb", firstName: "Nabil", age: 30, nationality: "Algérie", position: "MC", posX: 40, posY: 50, number: 6, height: "1.87m", bio: "Milieu algérien international. Retour au LOSC. Technique, passes. Ex-Tottenham.", photo: "https://img.a.transfermarkt.technology/portrait/big/205489-1687783841.jpg" },
+        { name: "Gomes", firstName: "Angel", age: 24, nationality: "Angleterre", position: "MOC", posX: 50, posY: 40, number: 8, height: "1.68m", bio: "Meneur anglais technique. Formé à Manchester United. Vision, dribbles. International anglais.", photo: "https://img.a.transfermarkt.technology/portrait/big/340324-1687783712.jpg" },
+        { name: "Zhegrova", firstName: "Edon", age: 25, nationality: "Kosovo", position: "AD", posX: 75, posY: 25, number: 23, height: "1.84m", bio: "Ailier kosovar explosif. International. Vitesse, dribbles, buts. Star du Kosovo.", photo: "https://img.a.transfermarkt.technology/portrait/big/446906-1687783765.jpg" },
+        { name: "David", firstName: "Jonathan", age: 24, nationality: "Canada", position: "BU", posX: 50, posY: 15, number: 9, height: "1.78m", bio: "Buteur canadien prolifique. Meilleur buteur du LOSC. Finition clinique. Star du Canada.", photo: "https://img.a.transfermarkt.technology/portrait/big/459615-1687783743.jpg" },
+        { name: "Cabella", firstName: "Remy", age: 34, nationality: "France", position: "AG", posX: 25, posY: 25, number: 10, height: "1.71m", bio: "Meneur français expérimenté. Retour au LOSC. Technique, vision. Ex-Montpellier. Magicien.", photo: "https://img.a.transfermarkt.technology/portrait/big/85206-1687783785.jpg" }
+      ],
+      2025: [
+        { name: "Chevalier", firstName: "Lucas", age: 24, nationality: "France", position: "GK", posX: 50, posY: 90, number: 30, height: "1.89m", bio: "International français. Titulaire indiscutable. Réflexes félins, jeu au pied. Futur grand.", photo: "https://img.a.transfermarkt.technology/portrait/big/547533-1687783733.jpg" },
+        { name: "Santos", firstName: "Tiago", age: 23, nationality: "Portugal", position: "DD", posX: 75, posY: 70, number: 22, height: "1.78m", bio: "Latéral portugais prometteur. International Espoirs. Vitesse, centres. Futur Seleção.", photo: "https://img.a.transfermarkt.technology/portrait/big/843844-1695145233.jpg" },
+        { name: "Diakité", firstName: "Bafodé", age: 24, nationality: "France", position: "DC", posX: 35, posY: 70, number: 2, height: "1.81m", bio: "Défenseur français polyvalent. Titulaire en EDF Espoirs. Puissance, vitesse. Avenir.", photo: "https://img.a.transfermarkt.technology/portrait/big/543675-1695143908.jpg" },
+        { name: "Alexsandro", firstName: "Alexsandro", age: 26, nationality: "Brésil", position: "DC", posX: 65, posY: 70, number: 4, height: "1.90m", bio: "Patron de la défense brésilienne du LOSC. Jeu aérien, duel. Futur Seleção.", photo: "https://img.a.transfermarkt.technology/portrait/big/687339-1687783885.jpg" },
+        { name: "Mandi", firstName: "Aïssa", age: 34, nationality: "Algérie", position: "DG", posX: 25, posY: 70, number: 22, height: "1.84m", bio: "Défenseur algérien expérimenté. International. Polyvalent, leadership. Champion d'Afrique.", photo: "https://img.a.transfermarkt.technology/portrait/big/82904-1687783689.jpg" },
+        { name: "Andre", firstName: "Benjamin", age: 35, nationality: "France", position: "MDC", posX: 50, posY: 60, number: 21, height: "1.80m", bio: "Capitaine légendaire. Plus de 500 matchs en Ligue 1. Warrior, leader vocal. Icône.", photo: "https://img.a.transfermarkt.technology/portrait/big/111625-1687783753.jpg" },
+        { name: "Bentaleb", firstName: "Nabil", age: 31, nationality: "Algérie", position: "MC", posX: 40, posY: 45, number: 6, height: "1.87m", bio: "Vice-capitaine algérien. Leader technique. Vision, passes. Ex-Tottenham et Schalke.", photo: "https://img.a.transfermarkt.technology/portrait/big/205489-1687783841.jpg" },
+        { name: "Gomes", firstName: "Angel", age: 25, nationality: "Angleterre", position: "MOC", posX: 60, posY: 35, number: 8, height: "1.68m", bio: "Numéro 10 créatif. Dribbles et passes décisives. Technique anglaise pure. Maestro.", photo: "https://img.a.transfermarkt.technology/portrait/big/340324-1687783712.jpg" },
+        { name: "Zhegrova", firstName: "Edon", age: 26, nationality: "Kosovo", position: "AD", posX: 75, posY: 25, number: 23, height: "1.84m", bio: "Star kosovare. Meilleur joueur du LOSC 2024. Vitesse, dribbles, buts. Héros du Kosovo.", photo: "https://img.a.transfermarkt.technology/portrait/big/446906-1687783765.jpg" },
+        { name: "David", firstName: "Jonathan", age: 25, nationality: "Canada", position: "BU", posX: 50, posY: 15, number: 9, height: "1.78m", bio: "Meilleur buteur de Ligue 1 2024. Machine à buts. Finition clinique. Légende canadienne.", photo: "https://img.a.transfermarkt.technology/portrait/big/459615-1687783743.jpg" },
+        { name: "Gudmundsson", firstName: "Albert", age: 28, nationality: "Islande", position: "AG", posX: 25, posY: 25, number: 10, height: "1.77m", bio: "Ailier islandais technique. International. Dribless, vision. Star islandaise.", photo: "https://img.a.transfermarkt.technology/portrait/big/242631-1687783812.jpg" }
+      ],
+      2026: [
+        { name: "Chevalier", firstName: "Lucas", age: 25, nationality: "France", position: "GK", posX: 50, posY: 90, number: 30, height: "1.89m", bio: "Numéro 2 de l'EDF. Futur grand gardien français. Réflexes, mental. Capitaine en devenir.", photo: "https://img.a.transfermarkt.technology/portrait/big/547533-1687783733.jpg" },
+        { name: "Santos", firstName: "Tiago", age: 24, nationality: "Portugal", position: "DD", posX: 75, posY: 70, number: 22, height: "1.78m", bio: "International portugais. Latéral moderne complet. Vitesse, centres, défense. Futur grand.", photo: "https://img.a.transfermarkt.technology/portrait/big/843844-1695145233.jpg" },
+        { name: "Ribeiro", firstName: "Alexsandro", age: 27, nationality: "Brésil", position: "DC", posX: 35, posY: 70, number: 4, height: "1.90m", bio: "Capitaine. Défenseur brésilien de classe internationale. Jeu aérien, leadership. Futur Seleção.", photo: "https://img.a.transfermarkt.technology/portrait/big/687339-1687783885.jpg" },
+        { name: "Yoro", firstName: "Leny", age: 21, nationality: "France", position: "DC", posX: 65, posY: 70, number: 15, height: "1.90m", bio: "Prodigy français. Déjà international A à 21 ans. Élégance, intelligence. Futur Ballon d'Or.", photo: "https://img.a.transfermarkt.technology/portrait/big/568248-1687783897.jpg" },
+        { name: "Meunier", firstName: "Thomas", age: 35, nationality: "Belgique", position: "DG", posX: 25, posY: 70, number: 12, height: "1.90m", bio: "Latéral belge expérimenté. International de référence. Ex-PSG et Dortmund. Leader vocal.", photo: "https://img.a.transfermarkt.technology/portrait/big/111560-1687783922.jpg" },
+        { name: "Bouaddi", firstName: "Ayyoub", age: 19, nationality: "France", position: "MDC", posX: 50, posY: 60, number: 21, height: "1.82m", bio: "Pépite formée au club. International Espoirs français. Sentinelle, vision. Futur EDF.", photo: "https://img.a.transfermarkt.technology/portrait/big/936520-1702494321.jpg" },
+        { name: "Andre Gomes", firstName: "Andre", age: 26, nationality: "Angleterre", position: "MC", posX: 40, posY: 45, number: 8, height: "1.68m", bio: "Meneur anglais élégant. Maître des coups de pied arrêtés. Technique, vision. Maestro.", photo: "https://img.a.transfermarkt.technology/portrait/big/340324-1687783712.jpg" },
+        { name: "Fernandez-Pardo", firstName: "Gabriel", age: 20, nationality: "Belgique", position: "AG", posX: 25, posY: 25, number: 7, height: "1.79m", bio: "Ailier belge explosif. Révélation de Ligue 1. Vitesse, dribbles. Future star.", photo: "https://img.a.transfermarkt.technology/portrait/big/936525-1702494523.jpg" },
+        { name: "David", firstName: "Jonathan", age: 26, nationality: "Canada", position: "BU", posX: 50, posY: 15, number: 9, height: "1.78m", bio: "Triple meilleur buteur de Ligue 1. Star canadienne. Finition clinique, intelligence. Légende LOSC.", photo: "https://img.a.transfermarkt.technology/portrait/big/459615-1687783743.jpg" },
+        { name: "Haraldsson", firstName: "Hakon", age: 23, nationality: "Islande", position: "MOC", posX: 60, posY: 35, number: 10, height: "1.80m", bio: "Meneur islandais technique. International régulier. Vision, passes. Star de l'Islande.", photo: "https://img.a.transfermarkt.technology/portrait/big/610621-1687783923.jpg" },
+        { name: "Zhegrova", firstName: "Edon", age: 27, nationality: "Kosovo", position: "AD", posX: 75, posY: 25, number: 23, height: "1.84m", bio: "Vice-capitaine. Meilleur joueur du LOSC. Vitesse, dribbles, buts. Héros national kosovar.", photo: "https://img.a.transfermarkt.technology/portrait/big/446906-1687783765.jpg" }
+      ]
+    }
+  },
+  lens: {
+    name: "RC Lens",
+    logo: "🟡🔴",
+    primaryColor: "f7d000",
+    players: {
+      2024: [
+        { name: "Samba", firstName: "Brice", age: 30, nationality: "France", position: "GK", posX: 50, posY: 90, number: 30, height: "1.86m", bio: "Gardien français international. Meilleur gardien de Ligue 1 2023. Réflexes, leadership. Capitaine.", photo: "https://img.a.transfermarkt.technology/portrait/big/178782-1682689371.jpg" },
+        { name: "Aguilar", firstName: "Ruben", age: 31, nationality: "France", position: "DD", posX: 75, posY: 70, number: 2, height: "1.72m", bio: "Latéral français expérimenté. International. Centres, débordements. Ex-Monaco.", photo: "https://img.a.transfermarkt.technology/portrait/big/198494-1682689392.jpg" },
+        { name: "Gradit", firstName: "Jonathan", age: 32, nationality: "France", position: "DC", posX: 35, posY: 70, number: 24, height: "1.82m", bio: "Défenseur français solide. Cadre du RC Lens. Duels, placement. Vice-capitaine.", photo: "https://img.a.transfermarkt.technology/portrait/big/292394-1682689461.jpg" },
+        { name: "Medina", firstName: "Facundo", age: 25, nationality: "Argentine", position: "DC", posX: 65, posY: 70, number: 14, height: "1.80m", bio: "Défenseur argentin gaucher. International. Technique, duels. Ex-River Plate.", photo: "https://img.a.transfermarkt.technology/portrait/big/448853-1682689472.jpg" },
+        { name: "Chavez", firstName: "Jhoanner", age: 23, nationality: "Équateur", position: "DG", posX: 25, posY: 70, number: 3, height: "1.78m", bio: "Latéral équatorien prometteur. International. Vitesse, puissance. Qualifié Mondial.", photo: "https://img.a.transfermarkt.technology/portrait/big/539830-1682689482.jpg" },
+        { name: "Abdul Samed", firstName: "Salis", age: 24, nationality: "Ghana", position: "MDC", posX: 50, posY: 60, number: 26, height: "1.79m", bio: "Milieu ghanéen récupérateur. International. Pressing, duels. Ex-Clermont.", photo: "https://img.a.transfermarkt.technology/portrait/big/504899-1682689673.jpg" },
+        { name: "Thomasson", firstName: "Adrien", age: 31, nationality: "France", position: "MC", posX: 40, posY: 50, number: 28, height: "1.80m", bio: "Milieu français technique. Créateur d'occasions. Passes, vision. Ex-Strasbourg.", photo: "https://img.a.transfermarkt.technology/portrait/big/166670-1682689477.jpg" },
+        { name: "Frankowski", firstName: "Przemyslaw", age: 29, nationality: "Pologne", position: "AD", posX: 75, posY: 40, number: 29, height: "1.75m", bio: "Ailier polonais polyvalent. International. Vitesse, dribbles. Ex-Chicago Fire.", photo: "https://img.a.transfermarkt.technology/portrait/big/263923-1682689668.jpg" },
+        { name: "Wahi", firstName: "Elye", age: 21, nationality: "France", position: "BU", posX: 50, posY: 15, number: 9, height: "1.84m", bio: "Buteur français espoir. Recruté de Montpellier. Vitesse, finition. International Espoirs.", photo: "https://img.a.transfermarkt.technology/portrait/big/610465-1682689691.jpg" },
+        { name: "Sotoca", firstName: "Florian", age: 34, nationality: "France", position: "AG", posX: 25, posY: 25, number: 7, height: "1.87m", bio: "Capitaine du RC Lens. Légende du club. Instinct, leadership. 100+ buts.", photo: "https://img.a.transfermarkt.technology/portrait/big/236786-1682689660.jpg" },
+        { name: "Fulgini", firstName: "Angelo", age: 28, nationality: "France", position: "MOC", posX: 50, posY: 40, number: 10, height: "1.79m", bio: "Meneur français technique. Finition et passes. Ex-Angers. Magicien.", photo: "https://img.a.transfermarkt.technology/portrait/big/222341-1682689664.jpg" }
+      ],
+      2025: [
+        { name: "Samba", firstName: "Brice", age: 31, nationality: "France", position: "GK", posX: 50, posY: 90, number: 30, height: "1.86m", bio: "International français. Top 3 des gardiens de Ligue 1. Leader, réflexes. Capitaine.", photo: "https://img.a.transfermarkt.technology/portrait/big/178782-1682689371.jpg" },
+        { name: "Aguilar", firstName: "Ruben", age: 32, nationality: "France", position: "DD", posX: 75, posY: 70, number: 2, height: "1.72m", bio: "Vice-capitaine. Expérience et leadership. Centres millimétrés. Pilier.", photo: "https://img.a.transfermarkt.technology/portrait/big/198494-1682689392.jpg" },
+        { name: "Gradit", firstName: "Jonathan", age: 33, nationality: "France", position: "DC", posX: 35, posY: 70, number: 24, height: "1.82m", bio: "Patron de la défense lensoise. Robustesse. Duel, placement. Guerrier.", photo: "https://img.a.transfermarkt.technology/portrait/big/292394-1682689461.jpg" },
+        { name: "Danso", firstName: "Kevin", age: 27, nationality: "Autriche", position: "DC", posX: 65, posY: 70, number: 4, height: "1.90m", bio: "Défenseur autrichien international. Puissance physique. Jeu aérien. Ex-Augsburg.", photo: "https://img.a.transfermarkt.technology/portrait/big/283454-1682689657.jpg" },
+        { name: "Haïdara", firstName: "Massadio", age: 33, nationality: "Mali", position: "DG", posX: 25, posY: 70, number: 21, height: "1.78m", bio: "Latéral malien international. Vitesse et débordements. Champion d'Afrique. Ex-Newcastle.", photo: "https://img.a.transfermarkt.technology/portrait/big/192565-1682689677.jpg" },
+        { name: "El Aynaoui", firstName: "Neil", age: 24, nationality: "Maroc", position: "MC", posX: 40, posY: 50, number: 26, height: "1.83m", bio: "Milieu marocain technique. Révélation 2024. Volume, passes. International marocain.", photo: "https://img.a.transfermarkt.technology/portrait/big/824865-1695144763.jpg" },
+        { name: "Thomasson", firstName: "Adrien", age: 32, nationality: "France", position: "MC", posX: 60, posY: 50, number: 28, height: "1.80m", bio: "Maître à jouer français. Créateur d'élite. Vision, passes. Capitaine adjoint.", photo: "https://img.a.transfermarkt.technology/portrait/big/166670-1682689477.jpg" },
+        { name: "Pereira da Costa", firstName: "David", age: 24, nationality: "France", position: "MOC", posX: 50, posY: 40, number: 25, height: "1.78m", bio: "Meneur français formé au club. Espoir international. Dribbles, créativité. Pur produit.", photo: "https://img.a.transfermarkt.technology/portrait/big/540453-1682689640.jpg" },
+        { name: "Nzola", firstName: "M'Bala", age: 29, nationality: "Angola", position: "BU", posX: 50, posY: 15, number: 18, height: "1.85m", bio: "Buteur angolais international. Recruté de la Fiorentina. Puissance, finition. Serial buteur.", photo: "https://img.a.transfermarkt.technology/portrait/big/265968-1682689698.jpg" },
+        { name: "Sotoca", firstName: "Florian", age: 35, nationality: "France", position: "AG", posX: 25, posY: 25, number: 7, height: "1.87m", bio: "Capitaine légendaire. Âme du RC Lens. Instinct, leadership. 150+ buts club.", photo: "https://img.a.transfermarkt.technology/portrait/big/236786-1682689660.jpg" },
+        { name: "Ojediran", firstName: "Hamzat", age: 22, nationality: "Nigeria", position: "MDC", posX: 50, posY: 60, number: 19, height: "1.80m", bio: "Milieu nigérian récupérateur. International. Pressing, duels. Future star.", photo: "https://img.a.transfermarkt.technology/portrait/big/888420-1701176444.jpg" }
+      ],
+      2026: [
+        { name: "Samba", firstName: "Brice", age: 32, nationality: "France", position: "GK", posX: 50, posY: 90, number: 30, height: "1.86m", bio: "Numéro 2 de l'EDF. Capitaine du RC Lens. Légende du club, leader. 300+ matchs.", photo: "https://img.a.transfermarkt.technology/portrait/big/178782-1682689371.jpg" },
+        { name: "Aguilar", firstName: "Ruben", age: 33, nationality: "France", position: "DD", posX: 75, posY: 70, number: 2, height: "1.72m", bio: "Légende du club. Multiple champion de Ligue 2. Fidélité, centres. 400+ matchs.", photo: "https://img.a.transfermarkt.technology/portrait/big/198494-1682689392.jpg" },
+        { name: "Gradit", firstName: "Jonathan", age: 34, nationality: "France", position: "DC", posX: 35, posY: 70, number: 24, height: "1.82m", bio: "Vice-capitaine. Plus de 200 matchs en Sang et Or. Warrior, duels. Icône.", photo: "https://img.a.transfermarkt.technology/portrait/big/292394-1682689461.jpg" },
+        { name: "Khusanov", firstName: "Abdukodir", age: 23, nationality: "Ouzbékistan", position: "DC", posX: 65, posY: 70, number: 15, height: "1.88m", bio: "Défenseur ouzbek prometteur. International. Physique, duels. Pépite asiatique.", photo: "https://img.a.transfermarkt.technology/portrait/big/846845-1701176893.jpg" },
+        { name: "Chavez", firstName: "Jhoanner", age: 25, nationality: "Équateur", position: "DG", posX: 25, posY: 70, number: 3, height: "1.78m", bio: "International équatorien titulaire. Titulaire indiscutable. Vitesse, puissance. Qualifié Mondial.", photo: "https://img.a.transfermarkt.technology/portrait/big/539830-1682689482.jpg" },
+        { name: "El Aynaoui", firstName: "Neil", age: 25, nationality: "Maroc", position: "MC", posX: 40, posY: 50, number: 26, height: "1.83m", bio: "International marocain. Milieu complet technique et physique. Volume, passes. Star Atlas.", photo: "https://img.a.transfermarkt.technology/portrait/big/824865-1695144763.jpg" },
+        { name: "Mendy", firstName: "Nampalys", age: 34, nationality: "Sénégal", position: "MDC", posX: 50, posY: 60, number: 6, height: "1.68m", bio: "Milieu sénégalais champion d'Afrique 2022. Expérience. Récupérateur, passes. Ex-Leicester.", photo: "https://img.a.transfermarkt.technology/portrait/big/170962-1682689703.jpg" },
+        { name: "Thomasson", firstName: "Adrien", age: 33, nationality: "France", position: "MOC", posX: 50, posY: 35, number: 28, height: "1.80m", bio: "Légende du club. Meilleur passeur du RC Lens. Vision, technique. 300+ matchs.", photo: "https://img.a.transfermarkt.technology/portrait/big/166670-1682689477.jpg" },
+        { name: "Wahi", firstName: "Elye", age: 23, nationality: "France", position: "BU", posX: 50, posY: 15, number: 9, height: "1.84m", bio: "International français. Meilleur buteur du RC Lens 2025. Vitesse, finition. Futur Bleu.", photo: "https://img.a.transfermarkt.technology/portrait/big/610465-1682689691.jpg" },
+        { name: "Sotoca", firstName: "Florian", age: 36, nationality: "France", position: "AG", posX: 25, posY: 25, number: 7, height: "1.87m", bio: "Capitaine légendaire. Dernière saison au plus haut niveau. Icône, 200+ buts. Statue au stade.", photo: "https://img.a.transfermarkt.technology/portrait/big/236786-1682689660.jpg" },
+        { name: "Zaroury", firstName: "Anass", age: 26, nationality: "Maroc", position: "AD", posX: 75, posY: 25, number: 11, height: "1.76m", bio: "Ailier marocain technique. International. Dribbles, buts. Ex-Burnley. Magicien.", photo: "https://img.a.transfermarkt.technology/portrait/big/495931-1682689644.jpg" }
+      ]
+    }
+  },
+  monaco: {
+    name: "AS Monaco",
+    logo: "🔴⚪",
+    primaryColor: "ed1c24",
+    players: { 
+      2024: [
+        { name: "Kohn", firstName: "Philipp", age: 26, nationality: "Suisse", position: "GK", posX: 50, posY: 90, number: 16, height: "1.89m", bio: "Gardien suisse international. Titulaire de Monaco. Réflexes, jeu au pied. Ex-Salzburg.", photo: "https://img.a.transfermarkt.technology/portrait/big/353591-1682689845.jpg" },
+        { name: "Vanderson", firstName: "Vanderson", age: 23, nationality: "Brésil", position: "DD", posX: 75, posY: 70, number: 2, height: "1.73m", bio: "Latéral brésilien explosif. International espoirs. Vitesse, centres. Futur Seleção.", photo: "https://img.a.transfermarkt.technology/portrait/big/622790-1682689960.jpg" },
+        { name: "Singo", firstName: "Wilfried", age: 24, nationality: "Côte d'Ivoire", position: "DC", posX: 35, posY: 70, number: 17, height: "1.90m", bio: "Défenseur ivoirien polyvalent. Champion d'Afrique 2023. Puissance, vitesse. Ex-Torino.", photo: "https://img.a.transfermarkt.technology/portrait/big/543542-1682690028.jpg" },
+        { name: "Kehrer", firstName: "Thilo", age: 28, nationality: "Allemagne", position: "DC", posX: 65, posY: 70, number: 5, height: "1.86m", bio: "Défenseur allemand polyvalent. International. Ex-PSG et West Ham. Expérience.", photo: "https://img.a.transfermarkt.technology/portrait/big/269199-1682689949.jpg" },
+        { name: "Jakobs", firstName: "Ismail", age: 25, nationality: "Sénégal", position: "DG", posX: 25, posY: 70, number: 14, height: "1.84m", bio: "Latéral sénégalais champion d'Afrique 2022. Vitesse. Ex-Cologne.", photo: "https://img.a.transfermarkt.technology/portrait/big/338683-1682689936.jpg" },
+        { name: "Zakaria", firstName: "Denis", age: 28, nationality: "Suisse", position: "MDC", posX: 50, posY: 60, number: 6, height: "1.91m", bio: "Milieu suisse capitaine. International régulier. Récupérateur, box-to-box. Ex-Juventus.", photo: "https://img.a.transfermarkt.technology/portrait/big/193300-1682689975.jpg" },
+        { name: "Fofana", firstName: "Youssouf", age: 25, nationality: "France", position: "MC", posX: 40, posY: 50, number: 19, height: "1.85m", bio: "Milieu français international. Finaliste Mondial 2022. Volume, pressing. Vice-capitaine.", photo: "https://img.a.transfermarkt.technology/portrait/big/362145-1682689908.jpg" },
+        { name: "Minamino", firstName: "Takumi", age: 29, nationality: "Japon", position: "AG", posX: 25, posY: 25, number: 18, height: "1.74m", bio: "Ailier japonais technique. Champion d'Asie 2023. Dribless, vision. Ex-Liverpool.", photo: "https://img.a.transfermarkt.technology/portrait/big/165793-1682689971.jpg" },
+        { name: "Balogun", firstName: "Folarin", age: 23, nationality: "USA", position: "BU", posX: 50, posY: 15, number: 9, height: "1.78m", bio: "Buteur américain formé à Arsenal. International USMNT. Finition, vitesse. Star US.", photo: "https://img.a.transfermarkt.technology/portrait/big/559473-1682690037.jpg" },
+        { name: "Golovin", firstName: "Aleksandr", age: 28, nationality: "Russie", position: "MOC", posX: 50, posY: 35, number: 10, height: "1.80m", bio: "Meneur russe créatif. Vice-capitaine de Monaco. Technique, passes. Ex-CSKA Moscou.", photo: "https://img.a.transfermarkt.technology/portrait/big/232757-1682689964.jpg" },
+        { name: "Ben Yedder", firstName: "Wissam", age: 34, nationality: "France", position: "BU", posX: 50, posY: 5, number: 10, height: "1.70m", bio: "Légende de Monaco. Meilleur buteur du club en activité. Instinct, finition. Ex-Seville.", photo: "https://img.a.transfermarkt.technology/portrait/big/126490-1682689956.jpg" }
+      ],
+      2025: [
+        { name: "Majecki", firstName: "Radoslaw", age: 26, nationality: "Pologne", position: "GK", posX: 50, posY: 90, number: 1, height: "1.93m", bio: "Gardien polonais international. Titulaire de Monaco. Grand gabarit, réflexes. Ex-Legia.", photo: "https://img.a.transfermarkt.technology/portrait/big/358054-1682689752.jpg" },
+        { name: "Vanderson", firstName: "Vanderson", age: 24, nationality: "Brésil", position: "DD", posX: 75, posY: 70, number: 2, height: "1.73m", bio: "International brésilien. Un des meilleurs latéraux de Ligue 1. Vitesse, technique. Futur grand.", photo: "https://img.a.transfermarkt.technology/portrait/big/622790-1682689960.jpg" },
+        { name: "Singo", firstName: "Wilfried", age: 25, nationality: "Côte d'Ivoire", position: "DC", posX: 35, posY: 70, number: 17, height: "1.90m", bio: "Défenseur ivoirien champion d'Afrique. Leader défense. Puissance, vitesse. International.", photo: "https://img.a.transfermarkt.technology/portrait/big/543542-1682690028.jpg" },
+        { name: "Salisu", firstName: "Mohammed", age: 26, nationality: "Ghana", position: "DC", posX: 65, posY: 70, number: 22, height: "1.91m", bio: "Défenseur ghanéen recruté de Southampton. International. Jeu aérien, duels. Monstre.", photo: "https://img.a.transfermarkt.technology/portrait/big/538984-1682690033.jpg" },
+        { name: "Caio Henrique", firstName: "Caio", age: 28, nationality: "Brésil", position: "DG", posX: 25, posY: 70, number: 12, height: "1.78m", bio: "Latéral brésilien technique. Centres de qualité. International espoirs. Ex-Atletico Madrid.", photo: "https://img.a.transfermarkt.technology/portrait/big/337295-1682689985.jpg" },
+        { name: "Matazo", firstName: "Eliot", age: 23, nationality: "Belgique", position: "MC", posX: 40, posY: 50, number: 21, height: "1.79m", bio: "Milieu belge formé au club. Espoir international. Technique, vision. Futur Diable Rouge.", photo: "https://img.a.transfermarkt.technology/portrait/big/504904-1682689899.jpg" },
+        { name: "Akliouche", firstName: "Maghnes", age: 23, nationality: "France", position: "MOC", posX: 60, posY: 35, number: 11, height: "1.83m", bio: "Milieu offensif français pépite. International Espoirs. Dribbles, passes. Future star.", photo: "https://img.a.transfermarkt.technology/portrait/big/667183-1682690008.jpg" },
+        { name: "Ben Seghir", firstName: "Eliesse", age: 20, nationality: "France", position: "AG", posX: 25, posY: 25, number: 7, height: "1.78m", bio: "Ailier français prodige. Formé au club, dribbles magiques. International Espoirs. Crack.", photo: "https://img.a.transfermarkt.technology/portrait/big/749670-1702408348.jpg" },
+        { name: "Embolo", firstName: "Breel", age: 28, nationality: "Suisse", position: "BU", posX: 50, posY: 15, number: 36, height: "1.85m", bio: "Buteur suisse puissant. International de référence. Vitesse, puissance, finition. Ex-Schalke.", photo: "https://img.a.transfermarkt.technology/portrait/big/195472-1682689994.jpg" },
+        { name: "Golovin", firstName: "Aleksandr", age: 29, nationality: "Russie", position: "MOC", posX: 50, posY: 45, number: 10, height: "1.80m", bio: "Capitaine. Meilleur joueur russe du championnat. Technique, vision, buts. Maestro.", photo: "https://img.a.transfermarkt.technology/portrait/big/232757-1682689964.jpg" },
+        { name: "Zakaria", firstName: "Denis", age: 29, nationality: "Suisse", position: "MDC", posX: 50, posY: 60, number: 6, height: "1.91m", bio: "Vice-capitaine suisse. Récupérateur d'élite. Volume, duels. Leader.", photo: "https://img.a.transfermarkt.technology/portrait/big/193300-1682689975.jpg" }
+      ],
+      2026: [
+        { name: "Majecki", firstName: "Radoslaw", age: 27, nationality: "Pologne", position: "GK", posX: 50, posY: 90, number: 1, height: "1.93m", bio: "Gardien polonais titulaire. Meilleur gardien de Ligue 1 2025. Réflexes félins. International.", photo: "https://img.a.transfermarkt.technology/portrait/big/358054-1682689752.jpg" },
+        { name: "Vanderson", firstName: "Vanderson", age: 25, nationality: "Brésil", position: "DD", posX: 75, posY: 70, number: 2, height: "1.73m", bio: "International brésilien. Capitaine du futur. Vitesse, technique, centres. Futur Seleção.", photo: "https://img.a.transfermarkt.technology/portrait/big/622790-1682689960.jpg" },
+        { name: "Singo", firstName: "Wilfried", age: 26, nationality: "Côte d'Ivoire", position: "DC", posX: 35, posY: 70, number: 17, height: "1.90m", bio: "Vice-champion d'Afrique 2024. Pilier de la défense. Puissance, vitesse, leadership.", photo: "https://img.a.transfermarkt.technology/portrait/big/543542-1682690028.jpg" },
+        { name: "Kehrer", firstName: "Thilo", age: 30, nationality: "Allemagne", position: "DC", posX: 65, posY: 70, number: 5, height: "1.86m", bio: "International allemand expérimenté. Polyvalence totale. Leadership, duels. Ex-PSG.", photo: "https://img.a.transfermarkt.technology/portrait/big/269199-1682689949.jpg" },
+        { name: "Caio Henrique", firstName: "Caio", age: 29, nationality: "Brésil", position: "DG", posX: 25, posY: 70, number: 12, height: "1.78m", bio: "Latéral brésilien titulaire. Olympien 2024. Technique, centres. International Seleção.", photo: "https://img.a.transfermarkt.technology/portrait/big/337295-1682689985.jpg" },
+        { name: "Zakaria", firstName: "Denis", age: 30, nationality: "Suisse", position: "MDC", posX: 50, posY: 60, number: 6, height: "1.91m", bio: "Capitaine de la Suisse. Leader du milieu monégasque. Récupération, volume. Warrior.", photo: "https://img.a.transfermarkt.technology/portrait/big/193300-1682689975.jpg" },
+        { name: "Camara", firstName: "Mohamed", age: 26, nationality: "Mali", position: "MC", posX: 40, posY: 45, number: 8, height: "1.87m", bio: "Milieu malien international. Puissance et technique. Box-to-box, volume. Ex-Salzburg.", photo: "https://img.a.transfermarkt.technology/portrait/big/560345-1682690017.jpg" },
+        { name: "Akliouche", firstName: "Maghnes", age: 24, nationality: "France", position: "MOC", posX: 60, posY: 35, number: 11, height: "1.83m", bio: "International français. Ballon d'Or Espoirs en approche. Technique, vision, buts. Crack.", photo: "https://img.a.transfermarkt.technology/portrait/big/667183-1682690008.jpg" },
+        { name: "Ben Seghir", firstName: "Eliesse", age: 21, nationality: "France", position: "AG", posX: 25, posY: 25, number: 7, height: "1.78m", bio: "Pépite française internationale. Avenir de l'EDF. Dribbles magiques, finition. Superstar.", photo: "https://img.a.transfermarkt.technology/portrait/big/749670-1702408348.jpg" },
+        { name: "Ilenikhena", firstName: "George", age: 20, nationality: "Nigeria", position: "BU", posX: 50, posY: 15, number: 9, height: "1.82m", bio: "Buteur nigérian prodige. Recruté d'Anvers. Instinct, vitesse, puissance. Futur grand.", photo: "https://img.a.transfermarkt.technology/portrait/big/939159-1701094523.jpg" },
+        { name: "Golovin", firstName: "Aleksandr", age: 30, nationality: "Russie", position: "MOC", posX: 50, posY: 40, number: 10, height: "1.80m", bio: "Vice-capitaine. Légende de Monaco, maître technicien. Vision, passes, buts. Icône.", photo: "https://img.a.transfermarkt.technology/portrait/big/232757-1682689964.jpg" }
+      ]
+    }
+  }
+};
+
+let currentTeam = null;
+let currentYear = 2024;
+let currentPlayer = null;
+const minYear = 2024;
+const maxYear = 2026;
+
+const menuPage = document.getElementById('menuPage');
+const detailPage = document.getElementById('detailPage');
+const pitchView = document.getElementById('pitchView');
+const playerDetailView = document.getElementById('playerDetailView');
+const teamsList = document.getElementById('teamsList');
+const playersContainer = document.getElementById('playersContainer');
+const currentYearEl = document.getElementById('currentYear');
+const clubNameEl = document.getElementById('clubName');
+
+function getInitials(firstName, lastName) {
+  const first = firstName ? firstName.charAt(0).toUpperCase() : '';
+  const last = lastName ? lastName.charAt(0).toUpperCase() : '';
+  return first + last;
+}
+
+function init() {
+  renderTeamsList();
+  setupEventListeners();
+}
+
+function renderTeamsList() {
+  teamsList.innerHTML = '';
+  Object.keys(teamsData).forEach(key => {
+    const team = teamsData[key];
+    const btn = document.createElement('button');
+    btn.className = 'club-card glass rounded-3xl p-8 flex flex-col items-center text-center gap-4';
+    btn.innerHTML = `
+      <div class="club-logo w-24 h-24 rounded-3xl flex items-center justify-center text-6xl shadow-2xl bg-white/70 border-4 border-white/80">
+        ${team.logo}
+      </div>
+      <div class="flex-1">
+        <div class="font-black text-2xl text-gray-800 mb-2">${team.name}</div>
+        <div class="text-sm text-gray-600 font-bold flex items-center justify-center gap-2 glass-dark px-4 py-2 rounded-xl">
+          <span>🇫🇷</span>
+          <span>Ligue 1</span>
+        </div>
+      </div>
+    `;
+    btn.onclick = () => showTeamDetail(key);
+    teamsList.appendChild(btn);
+  });
+}
+
+function showTeamDetail(teamKey) {
+  currentTeam = teamKey;
+  currentYear = 2024;
+  currentPlayer = null;
+  menuPage.classList.add('hidden');
+  detailPage.classList.remove('hidden');
+  pitchView.classList.remove('hidden');
+  playerDetailView.classList.add('hidden');
+  updateTeamDisplay();
+}
+
+function updateTeamDisplay() {
+  if (!currentTeam) return;
+  const team = teamsData[currentTeam];
+  clubNameEl.textContent = team.name;
+  currentYearEl.textContent = currentYear;
+  renderPlayers();
+}
+
+function renderPlayers() {
+  if (!currentTeam) return;
+  const team = teamsData[currentTeam];
+  const players = team.players[currentYear] || [];
   
-  <script>
-    const STORAGE_KEY = 'barnappli_sheets_data';
+  playersContainer.innerHTML = '';
+  
+  players.forEach((player, index) => {
+    const playerEl = document.createElement('div');
+    playerEl.className = 'player-avatar absolute';
+    playerEl.style.left = `${player.posX}%`;
+    playerEl.style.top = `${player.posY}%`;
+    playerEl.style.transform = 'translate(-50%, -50%)';
+    playerEl.style.animationDelay = `${index * 0.06}s`;
+    
+    const posColor = getPositionColor(player.position);
+    const initials = getInitials(player.firstName, player.name);
+    
+    playerEl.innerHTML = `
+      <div class="flex flex-col items-center">
+        <div class="player-photo-wrapper w-18 h-18 md:w-24 md:h-24 rounded-full overflow-hidden shadow-2xl border-4 border-white mb-2 ring-4 ring-${posColor}-500/60" style="background-color: #${team.primaryColor}">
+          <div class="player-initials">${initials}</div>
+        </div>
+        <div class="glass-dark backdrop-blur-md px-5 py-2.5 rounded-2xl text-center shadow-2xl border-2 border-white/60">
+          <div class="text-xs font-black text-white tracking-wide">${player.name}</div>
+          <div class="text-xs text-white font-bold bg-${posColor}-600 rounded-lg px-3 py-0.5 mt-1.5 inline-block">${player.number}</div>
+        </div>
+      </div>
+    `;
+    playerEl.onclick = () => showPlayerDetail(player);
+    playersContainer.appendChild(playerEl);
+  });
+}
 
-    function chargerDonnees() {
-      const donnees = localStorage.getItem(STORAGE_KEY);
-      return donnees ? JSON.parse(donnees) : [];
-    }
+function getPositionColor(pos) {
+  if (pos === 'GK') return 'blue';
+  if (['DC', 'DD', 'DG'].includes(pos)) return 'yellow';
+  if (['MDC', 'MC', 'MOC'].includes(pos)) return 'green';
+  return 'red';
+}
 
-    function sauvegarderDonnees(donnees) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(donnees));
-    }
+function showPlayerDetail(player) {
+  currentPlayer = player;
+  const team = teamsData[currentTeam];
+  
+  pitchView.classList.add('hidden');
+  playerDetailView.classList.remove('hidden');
+  
+  const playerCard = document.getElementById('playerCard');
+  playerCard.style.borderColor = `#${team.primaryColor}`;
+  playerCard.style.borderWidth = '3px';
+  
+  // Photo handling - only show if available, else initials
+  const photoWrapper = document.getElementById('playerPhotoWrapper');
+  const initialsEl = document.getElementById('playerInitials');
+  const initials = getInitials(player.firstName, player.name);
+  
+  photoWrapper.style.backgroundColor = `#${team.primaryColor}`;
+  initialsEl.textContent = initials;
+  initialsEl.classList.remove('hidden');
+  initialsEl.style.display = 'flex';
+  
+  document.getElementById('playerName').textContent = `${player.firstName} ${player.name}`;
+  document.getElementById('playerPosition').textContent = getPositionLabel(player.position);
+  document.getElementById('playerNumber').textContent = player.number;
+  
+  // Stats
+  document.getElementById('playerStats').innerHTML = `
+    <div class="glass rounded-xl p-4 text-center">
+      <div class="text-3xl font-black text-blue-900 mb-1">${player.age}</div>
+      <div class="text-xs text-gray-600 font-bold uppercase">Ans</div>
+    </div>
+    <div class="glass rounded-xl p-4 text-center">
+      <div class="text-lg font-black text-gray-800 mb-1">${player.nationality}</div>
+      <div class="text-xs text-gray-600 font-bold uppercase">Nationalité</div>
+    </div>
+    <div class="glass rounded-xl p-4 text-center">
+      <div class="text-2xl font-black text-red-700 mb-1">${player.height}</div>
+      <div class="text-xs text-gray-600 font-bold uppercase">Taille</div>
+    </div>
+    <div class="glass rounded-xl p-4 text-center">
+      <div class="text-xl font-black text-gray-800 mb-1">${currentYear}</div>
+      <div class="text-xs text-gray-600 font-bold uppercase">Saison</div>
+    </div>
+  `;
+  
+  // Transfermarkt link
+  const playerNameForUrl = `${player.firstName}+${player.name}`.replace(/ /g, '+');
+  const transfermarktUrl = `https://www.transfermarkt.fr/schnellsuche/ergebnis/schnellsuche?query=${playerNameForUrl}`;
+  const wikiUrl = `https://fr.wikipedia.org/wiki/${player.firstName}_${player.name}`.replace(/ /g, '_');
+  
+  document.getElementById('playerStatsLink').href = transfermarktUrl;
+  
+  document.getElementById('playerBio').textContent = player.bio;
+}
 
-    function echapperHTML(texte) {
-      const map = {
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        '"': '&quot;',
-        "'": '&#039;'
-      };
-      return String(texte).replace(/[&<>"']/g, m => map[m]);
-    }
+function getPositionLabel(pos) {
+  const labels = {
+    'GK': 'Gardien de but',
+    'DD': 'Défenseur droit',
+    'DG': 'Défenseur gauche',
+    'DC': 'Défenseur central',
+    'MDC': 'Milieu défensif',
+    'MC': 'Milieu central',
+    'MOC': 'Milieu offensif',
+    'AG': 'Ailier gauche',
+    'AD': 'Ailier droit',
+    'BU': 'Buteur'
+  };
+  return labels[pos] || pos;
+}
 
-    function afficherTableau() {
-      const donnees = chargerDonnees();
-      const tableContainer = document.getElementById('tableContainer');
-
-      if (donnees.length === 0) {
-        tableContainer.innerHTML = '<div class="empty-message">Aucune donnée. Ajoutez une ligne pour commencer ! 📝</div>';
-        return;
+function setupEventListeners() {
+  document.getElementById('backBtn').onclick = () => {
+    detailPage.classList.add('hidden');
+    menuPage.classList.remove('hidden');
+    currentTeam = null;
+    currentPlayer = null;
+  };
+  
+  document.getElementById('backToPitchBtn').onclick = () => {
+    playerDetailView.classList.add('hidden');
+    pitchView.classList.remove('hidden');
+    currentPlayer = null;
+  };
+  
+  document.getElementById('yearPlus').onclick = () => {
+    if (currentYear < maxYear) {
+      currentYear++;
+      if (currentPlayer) {
+        playerDetailView.classList.add('hidden');
+        pitchView.classList.remove('hidden');
+        currentPlayer = null;
       }
-
-      let html = `
-        <table>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Nom</th>
-              <th>Quantité</th>
-              <th>Note</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-      `;
-
-      donnees.forEach((ligne, index) => {
-        html += `
-          <tr>
-            <td>${index + 1}</td>
-            <td>${echapperHTML(ligne.nom)}</td>
-            <td>${ligne.quantite}</td>
-            <td>${echapperHTML(ligne.note)}</td>
-            <td>
-              <button class="btn-delete" onclick="supprimerLigne(${index})">Supprimer</button>
-            </td>
-          </tr>
-        `;
-      });
-
-      html += `
-          </tbody>
-        </table>
-      `;
-
-      tableContainer.innerHTML = html;
+      updateTeamDisplay();
     }
-
-    function ajouterLigne() {
-      const nom = document.getElementById('nomInput').value.trim();
-      const quantite = parseInt(document.getElementById('quantiteInput').value) || 0;
-      const note = document.getElementById('noteInput').value.trim();
-
-      if (!nom) {
-        alert('⚠️ Veuillez entrer un nom');
-        return;
+  };
+  
+  document.getElementById('yearMinus').onclick = () => {
+    if (currentYear > minYear) {
+      currentYear--;
+      if (currentPlayer) {
+        playerDetailView.classList.add('hidden');
+        pitchView.classList.remove('hidden');
+        currentPlayer = null;
       }
-
-      const donnees = chargerDonnees();
-      donnees.push({
-        nom: nom,
-        quantite: quantite,
-        note: note
-      });
-
-      sauvegarderDonnees(donnees);
-
-      document.getElementById('nomInput').value = '';
-      document.getElementById('quantiteInput').value = '';
-      document.getElementById('noteInput').value = '';
-
-      afficherTableau();
-      console.log('✅ Ligne ajoutée avec succès !');
+      updateTeamDisplay();
     }
+  };
+}
 
-    function supprimerLigne(index) {
-      const donnees = chargerDonnees();
-
-      if (index >= 0 && index < donnees.length) {
-        donnees.splice(index, 1);
-        sauvegarderDonnees(donnees);
-        afficherTableau();
-        console.log('🗑️ Ligne supprimée');
-      }
-    }
-
-    function confirmerVider() {
-      if (confirm('⚠️ Êtes-vous sûr ? Cette action est irréversible !')) {
-        viderTout();
-      }
-    }
-
-    function viderTout() {
-      localStorage.removeItem(STORAGE_KEY);
-
-      document.getElementById('nomInput').value = '';
-      document.getElementById('quantiteInput').value = '';
-      document.getElementById('noteInput').value = '';
-
-      afficherTableau();
-      console.log('🧹 Tout a été vidé');
-    }
-
-    function telechargerExcel() {
-      const donnees = chargerDonnees();
-
-      if (donnees.length === 0) {
-        alert('⚠️ Le tableau est vide. Ajoutez des données d\'abord !');
-        return;
-      }
-
-      const headers = ['#', 'Nom', 'Quantité', 'Note'];
-      const rows = donnees.map((ligne, index) => [
-        index + 1,
-        ligne.nom,
-        ligne.quantite,
-        ligne.note
-      ]);
-
-      const data = [headers, ...rows];
-      const worksheet = XLSX.utils.aoa_to_sheet(data);
-
-      worksheet['!cols'] = [
-        { wch: 5 },
-        { wch: 20 },
-        { wch: 12 },
-        { wch: 30 }
-      ];
-
-      const workbook = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(workbook, worksheet, 'Données');
-      XLSX.writeFile(workbook, 'barnappli_data.xlsx');
-
-      console.log('📥 Excel téléchargé');
-    }
-
-    document.getElementById('nomInput').addEventListener('keypress', function(e) {
-      if (e.key === 'Enter') ajouterLigne();
-    });
-
-    document.getElementById('quantiteInput').addEventListener('keypress', function(e) {
-      if (e.key === 'Enter') ajouterLigne();
-    });
-
-    document.getElementById('noteInput').addEventListener('keypress', function(e) {
-      if (e.key === 'Enter' && e.ctrlKey) ajouterLigne();
-    });
-
-    afficherTableau();
-  </script>
+init();
+</script>
+<script>(function(){document.addEventListener("click",function(e){var a=e.target.closest("[data-product-id]");if(!a)return;e.preventDefault();var pid=a.getAttribute("data-product-id");if(pid)parent.postMessage({type:"ecto-artifact-link-click",productId:pid},"*")})})();</script>
 </body>
 </html>
