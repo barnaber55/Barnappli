@@ -54,6 +54,12 @@
     box-shadow: 0 20px 60px rgba(0, 20, 137, 0.2), inset 0 1px 0 rgba(255,255,255,0.8);
   }
   
+  .glass-dark {
+    background: rgba(0, 20, 137, 0.85);
+    backdrop-filter: blur(15px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+  }
+  
   .title-france {
     background: linear-gradient(90deg, #001489 0%, #ffffff 48%, #ffffff 52%, #EF4135 100%);
     -webkit-background-clip: text;
@@ -140,6 +146,7 @@
     box-shadow: inset 0 0 100px rgba(0,0,0,0.7), 0 20px 60px rgba(0,0,0,0.4);
     position: relative;
     overflow: hidden;
+    touch-action: pinch-zoom;
   }
   
   .pitch-lines {
@@ -196,6 +203,7 @@
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     animation: playerDrop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
     cursor: pointer;
+    touch-action: manipulation;
   }
   
   @keyframes playerDrop {
@@ -221,6 +229,10 @@
   .player-photo-wrapper {
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     background: linear-gradient(135deg, #fff, #f0f0f0);
+  }
+  
+  .player-avatar-info {
+    backdrop-filter: blur(10px);
   }
   
   .player-detail {
@@ -315,6 +327,12 @@
     text-shadow: 0 2px 8px rgba(0,0,0,0.3);
   }
   
+  @media (max-width: 768px) {
+    .player-initials {
+      font-size: 1rem;
+    }
+  }
+  
   .stat-link {
     background: linear-gradient(135deg, #001489 0%, #4361ee 50%, #EF4135 100%);
     transition: all 0.3s ease;
@@ -368,7 +386,7 @@
               Bienvenue sur <span class="font-bold text-blue-900">Lilya FOOT 2026</span><br>
               Effectifs officiels de Ligue 1 • Saisons 2024 à 2026
             </p>
-            <div class="flex gap-3 mt-6">
+            <div class="flex gap-3 mt-6 flex-wrap">
               <span class="badge glass-dark px-4 py-2 rounded-xl text-white font-semibold text-sm">18 Clubs</span>
               <span class="badge glass-dark px-4 py-2 rounded-xl text-white font-semibold text-sm">3 Saisons</span>
               <span class="badge glass-dark px-4 py-2 rounded-xl text-white font-semibold text-sm">200+ Joueurs</span>
@@ -418,21 +436,21 @@
             Retour Menu
           </button>
           
-          <div class="flex items-center gap-6">
-            <button id="yearMinus" class="year-btn btn-year-minus w-16 h-16 rounded-2xl font-black text-white text-3xl shadow-xl">
+          <div class="flex items-center gap-4 md:gap-6">
+            <button id="yearMinus" class="year-btn btn-year-minus w-14 h-14 md:w-16 md:h-16 rounded-2xl font-black text-white text-2xl md:text-3xl shadow-xl">
               −
             </button>
-            <div class="text-center glass px-10 py-4 rounded-2xl shadow-lg">
+            <div class="text-center glass px-6 md:px-10 py-3 md:py-4 rounded-2xl shadow-lg">
               <p class="text-xs text-gray-600 font-bold mb-1 tracking-wider">SAISON</p>
-              <p id="currentYear" class="text-5xl font-black france-gradient bg-clip-text text-transparent">2024</p>
+              <p id="currentYear" class="text-4xl md:text-5xl font-black france-gradient bg-clip-text text-transparent">2024</p>
             </div>
-            <button id="yearPlus" class="year-btn btn-year-plus w-16 h-16 rounded-2xl font-black text-white text-3xl shadow-xl">
+            <button id="yearPlus" class="year-btn btn-year-plus w-14 h-14 md:w-16 md:h-16 rounded-2xl font-black text-white text-2xl md:text-3xl shadow-xl">
               +
             </button>
           </div>
           
-          <div id="clubInfo" class="text-center md:text-right w-full md:w-auto glass px-8 py-4 rounded-2xl shadow-lg">
-            <h2 id="clubName" class="text-3xl font-black text-gray-800"></h2>
+          <div id="clubInfo" class="text-center md:text-right w-full md:w-auto glass px-6 md:px-8 py-4 rounded-2xl shadow-lg">
+            <h2 id="clubName" class="text-2xl md:text-3xl font-black text-gray-800"></h2>
             <p id="clubCountry" class="text-gray-600 font-semibold flex items-center gap-2 justify-center md:justify-end mt-1">
               <span>🇫🇷</span>
               <span>France • Ligue 1</span>
@@ -442,30 +460,30 @@
       </div>
 
       <!-- Football Pitch -->
-      <div id="pitchView" class="glass rounded-[2rem] p-4 md:p-8 shadow-2xl">
-        <div class="pitch rounded-3xl w-full aspect-[3/4] md:aspect-[16/9] relative overflow-hidden" id="footballPitch">
+      <div id="pitchView" class="glass rounded-[2rem] p-3 md:p-8 shadow-2xl">
+        <div class="pitch rounded-2xl md:rounded-3xl w-full aspect-[3/4] md:aspect-[16/9] relative overflow-hidden" id="footballPitch">
           <div class="pitch-lines">
             <div class="goal-area-top"></div>
             <div class="goal-area-bottom"></div>
           </div>
           <div id="playersContainer" class="absolute inset-0"></div>
         </div>
-        <div class="mt-8 flex flex-wrap gap-4 justify-center">
-          <div class="flex items-center gap-3 glass px-5 py-3 rounded-xl shadow-lg">
-            <div class="w-5 h-5 bg-blue-600 rounded-full border-3 border-white shadow-lg"></div>
-            <span class="text-gray-800 font-bold text-sm">Gardien</span>
+        <div class="mt-6 md:mt-8 flex flex-wrap gap-2 md:gap-4 justify-center">
+          <div class="flex items-center gap-2 md:gap-3 glass px-3 md:px-5 py-2 md:py-3 rounded-xl shadow-lg">
+            <div class="w-4 h-4 md:w-5 md:h-5 bg-blue-600 rounded-full border-2 md:border-3 border-white shadow-lg"></div>
+            <span class="text-gray-800 font-bold text-xs md:text-sm">Gardien</span>
           </div>
-          <div class="flex items-center gap-3 glass px-5 py-3 rounded-xl shadow-lg">
-            <div class="w-5 h-5 bg-yellow-500 rounded-full border-3 border-white shadow-lg"></div>
-            <span class="text-gray-800 font-bold text-sm">Défense</span>
+          <div class="flex items-center gap-2 md:gap-3 glass px-3 md:px-5 py-2 md:py-3 rounded-xl shadow-lg">
+            <div class="w-4 h-4 md:w-5 md:h-5 bg-yellow-500 rounded-full border-2 md:border-3 border-white shadow-lg"></div>
+            <span class="text-gray-800 font-bold text-xs md:text-sm">Défense</span>
           </div>
-          <div class="flex items-center gap-3 glass px-5 py-3 rounded-xl shadow-lg">
-            <div class="w-5 h-5 bg-green-600 rounded-full border-3 border-white shadow-lg"></div>
-            <span class="text-gray-800 font-bold text-sm">Milieu</span>
+          <div class="flex items-center gap-2 md:gap-3 glass px-3 md:px-5 py-2 md:py-3 rounded-xl shadow-lg">
+            <div class="w-4 h-4 md:w-5 md:h-5 bg-green-600 rounded-full border-2 md:border-3 border-white shadow-lg"></div>
+            <span class="text-gray-800 font-bold text-xs md:text-sm">Milieu</span>
           </div>
-          <div class="flex items-center gap-3 glass px-5 py-3 rounded-xl shadow-lg">
-            <div class="w-5 h-5 bg-red-600 rounded-full border-3 border-white shadow-lg"></div>
-            <span class="text-gray-800 font-bold text-sm">Attaque</span>
+          <div class="flex items-center gap-2 md:gap-3 glass px-3 md:px-5 py-2 md:py-3 rounded-xl shadow-lg">
+            <div class="w-4 h-4 md:w-5 md:h-5 bg-red-600 rounded-full border-2 md:border-3 border-white shadow-lg"></div>
+            <span class="text-gray-800 font-bold text-xs md:text-sm">Attaque</span>
           </div>
         </div>
       </div>
@@ -709,52 +727,6 @@ const teamsData = {
       ]
     }
   },
-  lens: {
-    name: "RC Lens",
-    logo: "🟡🔴",
-    primaryColor: "f7d000",
-    players: {
-      2024: [
-        { name: "Samba", firstName: "Brice", age: 30, nationality: "France", position: "GK", posX: 50, posY: 90, number: 30, height: "1.86m", bio: "Gardien français international. Meilleur gardien de Ligue 1 2023. Réflexes, leadership. Capitaine.", photo: "https://img.a.transfermarkt.technology/portrait/big/178782-1682689371.jpg" },
-        { name: "Aguilar", firstName: "Ruben", age: 31, nationality: "France", position: "DD", posX: 75, posY: 70, number: 2, height: "1.72m", bio: "Latéral français expérimenté. International. Centres, débordements. Ex-Monaco.", photo: "https://img.a.transfermarkt.technology/portrait/big/198494-1682689392.jpg" },
-        { name: "Gradit", firstName: "Jonathan", age: 32, nationality: "France", position: "DC", posX: 35, posY: 70, number: 24, height: "1.82m", bio: "Défenseur français solide. Cadre du RC Lens. Duels, placement. Vice-capitaine.", photo: "https://img.a.transfermarkt.technology/portrait/big/292394-1682689461.jpg" },
-        { name: "Medina", firstName: "Facundo", age: 25, nationality: "Argentine", position: "DC", posX: 65, posY: 70, number: 14, height: "1.80m", bio: "Défenseur argentin gaucher. International. Technique, duels. Ex-River Plate.", photo: "https://img.a.transfermarkt.technology/portrait/big/448853-1682689472.jpg" },
-        { name: "Chavez", firstName: "Jhoanner", age: 23, nationality: "Équateur", position: "DG", posX: 25, posY: 70, number: 3, height: "1.78m", bio: "Latéral équatorien prometteur. International. Vitesse, puissance. Qualifié Mondial.", photo: "https://img.a.transfermarkt.technology/portrait/big/539830-1682689482.jpg" },
-        { name: "Abdul Samed", firstName: "Salis", age: 24, nationality: "Ghana", position: "MDC", posX: 50, posY: 60, number: 26, height: "1.79m", bio: "Milieu ghanéen récupérateur. International. Pressing, duels. Ex-Clermont.", photo: "https://img.a.transfermarkt.technology/portrait/big/504899-1682689673.jpg" },
-        { name: "Thomasson", firstName: "Adrien", age: 31, nationality: "France", position: "MC", posX: 40, posY: 50, number: 28, height: "1.80m", bio: "Milieu français technique. Créateur d'occasions. Passes, vision. Ex-Strasbourg.", photo: "https://img.a.transfermarkt.technology/portrait/big/166670-1682689477.jpg" },
-        { name: "Frankowski", firstName: "Przemyslaw", age: 29, nationality: "Pologne", position: "AD", posX: 75, posY: 40, number: 29, height: "1.75m", bio: "Ailier polonais polyvalent. International. Vitesse, dribbles. Ex-Chicago Fire.", photo: "https://img.a.transfermarkt.technology/portrait/big/263923-1682689668.jpg" },
-        { name: "Wahi", firstName: "Elye", age: 21, nationality: "France", position: "BU", posX: 50, posY: 15, number: 9, height: "1.84m", bio: "Buteur français espoir. Recruté de Montpellier. Vitesse, finition. International Espoirs.", photo: "https://img.a.transfermarkt.technology/portrait/big/610465-1682689691.jpg" },
-        { name: "Sotoca", firstName: "Florian", age: 34, nationality: "France", position: "AG", posX: 25, posY: 25, number: 7, height: "1.87m", bio: "Capitaine du RC Lens. Légende du club. Instinct, leadership. 100+ buts.", photo: "https://img.a.transfermarkt.technology/portrait/big/236786-1682689660.jpg" },
-        { name: "Fulgini", firstName: "Angelo", age: 28, nationality: "France", position: "MOC", posX: 50, posY: 40, number: 10, height: "1.79m", bio: "Meneur français technique. Finition et passes. Ex-Angers. Magicien.", photo: "https://img.a.transfermarkt.technology/portrait/big/222341-1682689664.jpg" }
-      ],
-      2025: [
-        { name: "Samba", firstName: "Brice", age: 31, nationality: "France", position: "GK", posX: 50, posY: 90, number: 30, height: "1.86m", bio: "International français. Top 3 des gardiens de Ligue 1. Leader, réflexes. Capitaine.", photo: "https://img.a.transfermarkt.technology/portrait/big/178782-1682689371.jpg" },
-        { name: "Aguilar", firstName: "Ruben", age: 32, nationality: "France", position: "DD", posX: 75, posY: 70, number: 2, height: "1.72m", bio: "Vice-capitaine. Expérience et leadership. Centres millimétrés. Pilier.", photo: "https://img.a.transfermarkt.technology/portrait/big/198494-1682689392.jpg" },
-        { name: "Gradit", firstName: "Jonathan", age: 33, nationality: "France", position: "DC", posX: 35, posY: 70, number: 24, height: "1.82m", bio: "Patron de la défense lensoise. Robustesse. Duel, placement. Guerrier.", photo: "https://img.a.transfermarkt.technology/portrait/big/292394-1682689461.jpg" },
-        { name: "Danso", firstName: "Kevin", age: 27, nationality: "Autriche", position: "DC", posX: 65, posY: 70, number: 4, height: "1.90m", bio: "Défenseur autrichien international. Puissance physique. Jeu aérien. Ex-Augsburg.", photo: "https://img.a.transfermarkt.technology/portrait/big/283454-1682689657.jpg" },
-        { name: "Haïdara", firstName: "Massadio", age: 33, nationality: "Mali", position: "DG", posX: 25, posY: 70, number: 21, height: "1.78m", bio: "Latéral malien international. Vitesse et débordements. Champion d'Afrique. Ex-Newcastle.", photo: "https://img.a.transfermarkt.technology/portrait/big/192565-1682689677.jpg" },
-        { name: "El Aynaoui", firstName: "Neil", age: 24, nationality: "Maroc", position: "MC", posX: 40, posY: 50, number: 26, height: "1.83m", bio: "Milieu marocain technique. Révélation 2024. Volume, passes. International marocain.", photo: "https://img.a.transfermarkt.technology/portrait/big/824865-1695144763.jpg" },
-        { name: "Thomasson", firstName: "Adrien", age: 32, nationality: "France", position: "MC", posX: 60, posY: 50, number: 28, height: "1.80m", bio: "Maître à jouer français. Créateur d'élite. Vision, passes. Capitaine adjoint.", photo: "https://img.a.transfermarkt.technology/portrait/big/166670-1682689477.jpg" },
-        { name: "Pereira da Costa", firstName: "David", age: 24, nationality: "France", position: "MOC", posX: 50, posY: 40, number: 25, height: "1.78m", bio: "Meneur français formé au club. Espoir international. Dribbles, créativité. Pur produit.", photo: "https://img.a.transfermarkt.technology/portrait/big/540453-1682689640.jpg" },
-        { name: "Nzola", firstName: "M'Bala", age: 29, nationality: "Angola", position: "BU", posX: 50, posY: 15, number: 18, height: "1.85m", bio: "Buteur angolais international. Recruté de la Fiorentina. Puissance, finition. Serial buteur.", photo: "https://img.a.transfermarkt.technology/portrait/big/265968-1682689698.jpg" },
-        { name: "Sotoca", firstName: "Florian", age: 35, nationality: "France", position: "AG", posX: 25, posY: 25, number: 7, height: "1.87m", bio: "Capitaine légendaire. Âme du RC Lens. Instinct, leadership. 150+ buts club.", photo: "https://img.a.transfermarkt.technology/portrait/big/236786-1682689660.jpg" },
-        { name: "Ojediran", firstName: "Hamzat", age: 22, nationality: "Nigeria", position: "MDC", posX: 50, posY: 60, number: 19, height: "1.80m", bio: "Milieu nigérian récupérateur. International. Pressing, duels. Future star.", photo: "https://img.a.transfermarkt.technology/portrait/big/888420-1701176444.jpg" }
-      ],
-      2026: [
-        { name: "Samba", firstName: "Brice", age: 32, nationality: "France", position: "GK", posX: 50, posY: 90, number: 30, height: "1.86m", bio: "Numéro 2 de l'EDF. Capitaine du RC Lens. Légende du club, leader. 300+ matchs.", photo: "https://img.a.transfermarkt.technology/portrait/big/178782-1682689371.jpg" },
-        { name: "Aguilar", firstName: "Ruben", age: 33, nationality: "France", position: "DD", posX: 75, posY: 70, number: 2, height: "1.72m", bio: "Légende du club. Multiple champion de Ligue 2. Fidélité, centres. 400+ matchs.", photo: "https://img.a.transfermarkt.technology/portrait/big/198494-1682689392.jpg" },
-        { name: "Gradit", firstName: "Jonathan", age: 34, nationality: "France", position: "DC", posX: 35, posY: 70, number: 24, height: "1.82m", bio: "Vice-capitaine. Plus de 200 matchs en Sang et Or. Warrior, duels. Icône.", photo: "https://img.a.transfermarkt.technology/portrait/big/292394-1682689461.jpg" },
-        { name: "Khusanov", firstName: "Abdukodir", age: 23, nationality: "Ouzbékistan", position: "DC", posX: 65, posY: 70, number: 15, height: "1.88m", bio: "Défenseur ouzbek prometteur. International. Physique, duels. Pépite asiatique.", photo: "https://img.a.transfermarkt.technology/portrait/big/846845-1701176893.jpg" },
-        { name: "Chavez", firstName: "Jhoanner", age: 25, nationality: "Équateur", position: "DG", posX: 25, posY: 70, number: 3, height: "1.78m", bio: "International équatorien titulaire. Titulaire indiscutable. Vitesse, puissance. Qualifié Mondial.", photo: "https://img.a.transfermarkt.technology/portrait/big/539830-1682689482.jpg" },
-        { name: "El Aynaoui", firstName: "Neil", age: 25, nationality: "Maroc", position: "MC", posX: 40, posY: 50, number: 26, height: "1.83m", bio: "International marocain. Milieu complet technique et physique. Volume, passes. Star Atlas.", photo: "https://img.a.transfermarkt.technology/portrait/big/824865-1695144763.jpg" },
-        { name: "Mendy", firstName: "Nampalys", age: 34, nationality: "Sénégal", position: "MDC", posX: 50, posY: 60, number: 6, height: "1.68m", bio: "Milieu sénégalais champion d'Afrique 2022. Expérience. Récupérateur, passes. Ex-Leicester.", photo: "https://img.a.transfermarkt.technology/portrait/big/170962-1682689703.jpg" },
-        { name: "Thomasson", firstName: "Adrien", age: 33, nationality: "France", position: "MOC", posX: 50, posY: 35, number: 28, height: "1.80m", bio: "Légende du club. Meilleur passeur du RC Lens. Vision, technique. 300+ matchs.", photo: "https://img.a.transfermarkt.technology/portrait/big/166670-1682689477.jpg" },
-        { name: "Wahi", firstName: "Elye", age: 23, nationality: "France", position: "BU", posX: 50, posY: 15, number: 9, height: "1.84m", bio: "International français. Meilleur buteur du RC Lens 2025. Vitesse, finition. Futur Bleu.", photo: "https://img.a.transfermarkt.technology/portrait/big/610465-1682689691.jpg" },
-        { name: "Sotoca", firstName: "Florian", age: 36, nationality: "France", position: "AG", posX: 25, posY: 25, number: 7, height: "1.87m", bio: "Capitaine légendaire. Dernière saison au plus haut niveau. Icône, 200+ buts. Statue au stade.", photo: "https://img.a.transfermarkt.technology/portrait/big/236786-1682689660.jpg" },
-        { name: "Zaroury", firstName: "Anass", age: 26, nationality: "Maroc", position: "AD", posX: 75, posY: 25, number: 11, height: "1.76m", bio: "Ailier marocain technique. International. Dribbles, buts. Ex-Burnley. Magicien.", photo: "https://img.a.transfermarkt.technology/portrait/big/495931-1682689644.jpg" }
-      ]
-    }
-  },
   monaco: {
     name: "AS Monaco",
     logo: "🔴⚪",
@@ -878,12 +850,16 @@ function renderPlayers() {
   
   playersContainer.innerHTML = '';
   
+  const isMobile = window.innerWidth < 768;
+  const playerCount = players.length;
+  const scaleFactor = isMobile && playerCount > 10 ? 0.85 : 1;
+  
   players.forEach((player, index) => {
     const playerEl = document.createElement('div');
     playerEl.className = 'player-avatar absolute';
     playerEl.style.left = `${player.posX}%`;
     playerEl.style.top = `${player.posY}%`;
-    playerEl.style.transform = 'translate(-50%, -50%)';
+    playerEl.style.transform = `translate(-50%, -50%) scale(${scaleFactor})`;
     playerEl.style.animationDelay = `${index * 0.06}s`;
     
     const posColor = getPositionColor(player.position);
@@ -891,12 +867,12 @@ function renderPlayers() {
     
     playerEl.innerHTML = `
       <div class="flex flex-col items-center">
-        <div class="player-photo-wrapper w-18 h-18 md:w-24 md:h-24 rounded-full overflow-hidden shadow-2xl border-4 border-white mb-2 ring-4 ring-${posColor}-500/60" style="background-color: #${team.primaryColor}">
+        <div class="player-photo-wrapper w-14 h-14 md:w-24 md:h-24 rounded-full overflow-hidden shadow-2xl border-2 md:border-4 border-white mb-1 md:mb-2 ring-2 md:ring-4 ring-${posColor}-500/60" style="background-color: #${team.primaryColor}">
           <div class="player-initials">${initials}</div>
         </div>
-        <div class="glass-dark backdrop-blur-md px-5 py-2.5 rounded-2xl text-center shadow-2xl border-2 border-white/60">
-          <div class="text-xs font-black text-white tracking-wide">${player.name}</div>
-          <div class="text-xs text-white font-bold bg-${posColor}-600 rounded-lg px-3 py-0.5 mt-1.5 inline-block">${player.number}</div>
+        <div class="player-avatar-info glass-dark backdrop-blur-md px-2 py-1 md:px-5 md:py-2.5 rounded-lg md:rounded-2xl text-center shadow-xl md:shadow-2xl border md:border-2 border-white/60">
+          <div class="text-[10px] md:text-xs font-black text-white tracking-wide leading-tight">${player.name}</div>
+          <div class="text-[9px] md:text-xs text-white font-bold bg-${posColor}-600 rounded md:rounded-lg px-1.5 py-0 md:px-3 md:py-0.5 mt-0.5 md:mt-1.5 inline-block">${player.number}</div>
         </div>
       </div>
     `;
@@ -923,7 +899,6 @@ function showPlayerDetail(player) {
   playerCard.style.borderColor = `#${team.primaryColor}`;
   playerCard.style.borderWidth = '3px';
   
-  // Photo handling - only show if available, else initials
   const photoWrapper = document.getElementById('playerPhotoWrapper');
   const initialsEl = document.getElementById('playerInitials');
   const initials = getInitials(player.firstName, player.name);
@@ -937,7 +912,6 @@ function showPlayerDetail(player) {
   document.getElementById('playerPosition').textContent = getPositionLabel(player.position);
   document.getElementById('playerNumber').textContent = player.number;
   
-  // Stats
   document.getElementById('playerStats').innerHTML = `
     <div class="glass rounded-xl p-4 text-center">
       <div class="text-3xl font-black text-blue-900 mb-1">${player.age}</div>
@@ -957,13 +931,10 @@ function showPlayerDetail(player) {
     </div>
   `;
   
-  // Transfermarkt link
   const playerNameForUrl = `${player.firstName}+${player.name}`.replace(/ /g, '+');
   const transfermarktUrl = `https://www.transfermarkt.fr/schnellsuche/ergebnis/schnellsuche?query=${playerNameForUrl}`;
-  const wikiUrl = `https://fr.wikipedia.org/wiki/${player.firstName}_${player.name}`.replace(/ /g, '_');
   
   document.getElementById('playerStatsLink').href = transfermarktUrl;
-  
   document.getElementById('playerBio').textContent = player.bio;
 }
 
@@ -1020,6 +991,12 @@ function setupEventListeners() {
       updateTeamDisplay();
     }
   };
+  
+  window.addEventListener('resize', () => {
+    if (currentTeam && pitchView && !pitchView.classList.contains('hidden')) {
+      renderPlayers();
+    }
+  });
 }
 
 init();
